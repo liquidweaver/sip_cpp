@@ -1283,12 +1283,23 @@ SipRequest::SipRequest( const SipRequest& rhs ) : SipMessage( MT_REQUEST )
 	this->requestMethod = rhs.requestMethod;
 	m_requestURI = rhs.m_requestURI;
 
-	m_headers["via"] = rhs.GetHeaderValues("via");
-	m_headers["cseq"] = rhs.GetHeaderValues("cseq");
-	m_headers["call-id"] = rhs.GetHeaderValues("call-id");
-	m_headers["to"] = rhs.GetHeaderValues("to");
-	m_headers["from"] = rhs.GetHeaderValues("from");
-	m_headers["content-length"] = rhs.GetHeaderValues("content-length");
+    if ( rhs.HasHeader( "via" ) )
+    	m_headers["via"] = rhs.GetHeaderValues("via");
+
+    if ( rhs.HasHeader( "cseq" ) )
+        m_headers["cseq"] = rhs.GetHeaderValues("cseq");
+
+    if ( rhs.HasHeader( "call-id" ) )
+        m_headers["call-id"] = rhs.GetHeaderValues("call-id");
+
+    if ( rhs.HasHeader( "to" ) )
+        m_headers["to"] = rhs.GetHeaderValues("to");
+
+    if ( rhs.HasHeader( "from" ) )
+        m_headers["from"] = rhs.GetHeaderValues("from");
+
+    if (rhs.HasHeader( "content-length" ) )
+        m_headers["content-length"] = rhs.GetHeaderValues("content-length");
 
 	if ( rhs.HasHeader( "contact" ) )
 		m_headers["contact"] = rhs.GetHeaderValues("contact"); //May want to remove this to force proxying at some point

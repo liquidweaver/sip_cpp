@@ -63,6 +63,7 @@ namespace Sip
 #define SIP_TF SIP_T1 * 64
 #define SIP_TK SIP_T4
 #define SIP_TI SIP_T4
+#define SIP_TJ SIP_T1 * 64
 
 
 const int DEFAULT_UDP_LISTENPORT = 5060;

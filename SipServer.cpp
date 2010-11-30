@@ -128,6 +128,10 @@ Via::Via ( const SipHeaderValue& shv ) throw ( ViaException )
 	}
 }
 
+Via::Via()
+	: has_port( false ), has_host( false ), has_transportProtocol( false ), m_rfc3261compliant( false ), has_branch( false )
+{}
+
 int	Via::Port() const throw( ViaException )
 {
 	if ( this->has_port )
@@ -183,6 +187,28 @@ bool Via::HasTransportProtocol() const throw()
 bool Sip::Via::HasBranch() const throw()
 {
 	return has_branch;
+}
+
+string Sip::Via::ToString() const 
+{
+	stringstream asString;
+	asString << "SIP/2.0/";
+	if ( has_transportProtocol )
+		asString << m_transportProtocol;
+	else
+		asString << "UDP";
+	asString << ' ';
+	
+	if ( has_host ) {
+		asString << m_host;
+		
+		if ( has_port )
+			asString << ':' << m_port;
+	}
+	else
+		throw ViaException( "Via::ToString() : No host!" );
+
+	return asString.str();
 }
 
 //
@@ -590,6 +616,11 @@ CSeq::CSeq ( int sequence, SipRequest::REQUEST_METHOD rm ) throw( CSeqException 
 	}
 }
 
+CSeq::CSeq()
+{
+	//Stub
+}
+
 string CSeq::ToString() const throw()
 {
 	ostringstream cseqAsStringBuilder;
@@ -637,6 +668,11 @@ int 		CSeq::Sequence() const throw()
 SipRequest::REQUEST_METHOD 	CSeq::RequestMethod() const throw()
 {
 	return m_requestMethod;
+}
+
+string								CSeq::RequestMethodAsString() const throw()
+{
+	return RequestTypes.ReverseGet( m_requestMethod );	
 }
 
 CSeq&									CSeq::Increment() throw()
@@ -718,6 +754,17 @@ SipHeaderValue::SipHeaderValue( const string& rawValue ) throw()
 		m_hasTags = true;
 	}
 }
+
+SipHeaderValue::SipHeaderValue ( const Via& via )
+{
+	m_value = via.ToString();
+
+	if ( via.HasBranch() ) {
+		m_hasTags = true;
+		m_tags.insert( std::pair<string, string>( "branch", via.Branch() ) );
+	}
+}
+
 
 const map<string, string>& SipHeaderValue::Tags() const throw( SipHeaderValueException )
 {

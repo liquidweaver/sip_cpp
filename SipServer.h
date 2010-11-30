@@ -228,6 +228,8 @@ class ViaException : public SipHeaderValueException
 
 };
 
+
+class Via; //Forward declaration for SipHeaderValue-from-Via ctor
 /**
 * \class SipHeaderValue
 * \brief A container for a single value from a SIP header.
@@ -237,6 +239,7 @@ class SipHeaderValue
 	public:
 		SipHeaderValue ( const string& value,  map<string, string> tags ) throw();
 		SipHeaderValue ( const string& value ) throw();
+		SipHeaderValue ( const Via& via ); 
 		/**
 		 *     Allows you to access this value tags, if applicable
 		 * @return A const reference to the tags
@@ -307,6 +310,7 @@ class Via
 {
 	public:
 		Via ( const SipHeaderValue& shv ) throw ( ViaException );
+		Via ();
 
 		int	Port() const throw( ViaException );
 		const string& Host() const throw( ViaException );
@@ -318,6 +322,9 @@ class Via
 		bool HasHost() const throw();
 		bool HasTransportProtocol() const throw();
 		bool HasBranch() const throw();
+
+		//Warning: Will not return branch
+		string ToString() const;
 	protected:
 		int m_port;
 		string m_host;
@@ -607,11 +614,13 @@ class CSeq
 		CSeq ( const SipHeaderValue& srhv ) throw ( CSeqException );
 
 		CSeq ( int sequence, SipRequest::REQUEST_METHOD rm ) throw( CSeqException );
+		CSeq ();
 
 		string								ToString() const throw();
 
 		int 									Sequence() const throw();
 		SipRequest::REQUEST_METHOD 	RequestMethod() const throw();
+		string								RequestMethodAsString() const throw();
 
 		CSeq&									Increment() throw();
 	protected:

@@ -76,55 +76,17 @@ string RandomString( int length )
 Via::Via ( const SipHeaderValue& shv ) throw ( ViaException )
 	: has_port( false ), has_host( false ), has_transportProtocol( false ), m_rfc3261compliant( false ), has_branch( false )
 {
-	//                                                     1                          2         3
-	//                                    [Protocol                        ]   [Host       ][Opt. Port ]
-	boost::regex viaExpression( "^SIP/2.0/((?:UDP)|(?:TCP)|(?:TLS)|(?:SCTP))\\s([^:\\?<>;]+)(?::(\\d+))?.*$" );
-	boost::cmatch matches;
+	ParseFromSHV( shv );
+}
 
-	try
-	{
-
-		if ( ! shv.HasTag( "branch" ) )
-		{
-			//throw ViaException( "Via does not have a branch tag." ); //We should do this; ...Via header field MUST contain a branch parameter... ( RFC 3261:8.1.1.7 Para. 2 )
-			//cerr << "Warning: 'Via' without branch tag: " << shv.Value() << endl;
-		}
-		else if ( shv.Tags().find( "branch" )->second.find( "z9hG4bK" ) == 0  ) //Cannot use [], discards cv
-		{
-			m_rfc3261compliant = true;
-			has_branch = true;
-			m_branch = shv.Tags().find( "branch" )->second;
-		}
-
-		if ( boost::regex_match( shv.Value().c_str(), matches, viaExpression ) )
-		{
-			string transportProtocolAsString( matches[1].first, matches[1].second );
-			transform( transportProtocolAsString.begin(), transportProtocolAsString.end(), transportProtocolAsString.begin(), (int(*)(int))tolower );
-			try
-			{
-				m_transportProtocol = TransportProtocolTypes.Get( transportProtocolAsString );
-				this->has_transportProtocol = true;
-			}
-			catch ( LookupTableException& e )
-			{
-				throw ViaException( string( "Uknown protocol specified in Via: " ) + string( matches[1].first, matches[1].second ) );
-			}
-
-			m_host = string( matches[2].first, matches[2].second );
-			this->has_host = true;
-
-			if ( matches[3].matched ) //Port?
-			{
-				m_port = atoi( string( matches[3].first, matches[3].second ).c_str() );
-				this->has_port = true;
-			}
-		}
-		else
-			throw ViaException( string( "Invalid 'Via' value: " ) + shv.Value() );
+Via::Via ( const string& viaString ) throw ( ViaException )
+{
+	try {
+		SipHeaderValue shvForVia( viaString );
+		ParseFromSHV( shvForVia );
 	}
-	catch( SipHeaderValueException& e )
-	{
-		throw ViaException( string( "Invalid 'Via' value: " ) + shv.Value() + " (From exception: " + e.what() + ")" );
+	catch( SipHeaderValueException& e ) {
+		throw ViaException( string( "Invalid 'Via' value: " ) + viaString + " (From exception: " + e.what() + ")" );
 	}
 }
 
@@ -193,8 +155,11 @@ string Sip::Via::ToString() const
 {
 	stringstream asString;
 	asString << "SIP/2.0/";
-	if ( has_transportProtocol )
-		asString << m_transportProtocol;
+	if ( has_transportProtocol ) {
+		string transportProtocolAsString( TransportProtocolTypes.ReverseGet( m_transportProtocol ) );
+		transform( transportProtocolAsString.begin(), transportProtocolAsString.end(), transportProtocolAsString.begin(), (int(*)(int))toupper );
+		asString << transportProtocolAsString;
+	}
 	else
 		asString << "UDP";
 	asString << ' ';
@@ -211,6 +176,59 @@ string Sip::Via::ToString() const
 	return asString.str();
 }
 
+void Via::ParseFromSHV( const SipHeaderValue& shv )
+{
+	//                                                     1                          2         3
+	//                                    [Protocol                        ]   [Host       ][Opt. Port ]
+	boost::regex viaExpression( "^SIP/2.0/((?:UDP)|(?:TCP)|(?:TLS)|(?:SCTP))\\s([^:\\?<>;]+)(?::(\\d+))?.*$" );
+	boost::cmatch matches;
+
+	try
+	{
+
+		if ( ! shv.HasTag( "branch" ) )
+		{
+			//throw ViaException( "Via does not have a branch tag." ); //We should do this; ...Via header field MUST contain a branch parameter... ( RFC 3261:8.1.1.7 Para. 2 )
+			//cerr << "Warning: 'Via' without branch tag: " << shv.Value() << endl;
+		}
+		else if ( shv.Tags().find( "branch" )->second.find( "z9hG4bK" ) == 0  ) //Cannot use [], discards cv
+		{
+			m_rfc3261compliant = true;
+			has_branch = true;
+			m_branch = shv.Tags().find( "branch" )->second;
+		}
+
+		if ( boost::regex_match( shv.Value().c_str(), matches, viaExpression ) )
+		{
+			string transportProtocolAsString( matches[1].first, matches[1].second );
+			transform( transportProtocolAsString.begin(), transportProtocolAsString.end(), transportProtocolAsString.begin(), (int(*)(int))tolower );
+			try
+			{
+				m_transportProtocol = TransportProtocolTypes.Get( transportProtocolAsString );
+				this->has_transportProtocol = true;
+			}
+			catch ( LookupTableException& e )
+			{
+				throw ViaException( string( "Uknown protocol specified in Via: " ) + string( matches[1].first, matches[1].second ) );
+			}
+
+			m_host = string( matches[2].first, matches[2].second );
+			this->has_host = true;
+
+			if ( matches[3].matched ) //Port?
+			{
+				m_port = atoi( string( matches[3].first, matches[3].second ).c_str() );
+				this->has_port = true;
+			}
+		}
+		else
+			throw ViaException( string( "Invalid 'Via' value: " ) + shv.Value() );
+	}
+	catch( SipHeaderValueException& e )
+	{
+		throw ViaException( string( "Invalid 'Via' value: " ) + shv.Value() + " (From exception: " + e.what() + ")" );
+	}
+}
 //
 // URI
 //

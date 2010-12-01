@@ -98,7 +98,7 @@ class SipServerException : public exception
 			: m_s ( what ), m_m( message) {}
 		~SipServerException () throw() {}
 
-		const char * what() const throw()  { return m_s.c_str(); }
+		virtual const char * what() const throw()  { return m_s.c_str(); }
 
 		string originalMessage() throw() { return m_m; }
 
@@ -119,7 +119,7 @@ class SipServerTimeout : public exception
 	: m_s ( what ) {}
 		~SipServerTimeout () throw() {}
 
-		const char * what() const throw()  { return m_s.c_str(); }
+		virtual const char * what() const throw()  { return m_s.c_str(); }
 
 	private:
 
@@ -139,7 +139,7 @@ class SipProtocolException : public std::exception
 		~SipProtocolException () throw() {}
 
 		std::string code() throw() { return m_code; }
-		const char * what() const throw() { return m_desc.c_str(); }
+		virtual const char * what() const throw() { return m_desc.c_str(); }
 
 	private:
 
@@ -310,6 +310,7 @@ class Via
 {
 	public:
 		Via ( const SipHeaderValue& shv ) throw ( ViaException );
+		Via ( const string& viaString ) throw ( ViaException );
 		Via ();
 
 		int	Port() const throw( ViaException );
@@ -326,6 +327,7 @@ class Via
 		//Warning: Will not return branch
 		string ToString() const;
 	protected:
+		void ParseFromSHV( const SipHeaderValue& shv );
 		int m_port;
 		string m_host;
 		string m_branch;

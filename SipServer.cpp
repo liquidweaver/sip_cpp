@@ -1166,11 +1166,8 @@ void SipMessage::SetHeader( const string& headerName, const SipHeaderValue& valu
 string SipMessage::MassageHeaderKey( string headerName ) const throw()
 {
 	transform(headerName.begin(), headerName.end(), headerName.begin(), (int(*)(int))tolower ); //Go lowercase
-	try
-	{	//Transform if it matches a short version
+	if ( HeaderConversions.HasKey( headerName ) )
 		headerName = HeaderConversions.Get( headerName );
-	}
-	catch (...) {}
 
 	return headerName;
 }
@@ -1521,9 +1518,6 @@ string SipResponse::ToString() const
 string SipUtility::GetMessage( auto_ptr<SipMessage>& sipMessage, int sock )
 {
 	char buffer[ BUFFERSIZE ];
-	boost::regex requestRegex( "^\\s*(\\w+)\\ssip:(.+?)\\sSIP/2.0$\\r\\n.*" );
-	boost::regex responseRegex( "^\\s*SIP/2.0\\s(\\d{3})\\s(.*?)\\r\\n.*" );
-	boost::cmatch matches;
 	sockaddr_in clientAddr;
 	bzero( &clientAddr, sizeof( clientAddr ) );
 	sockaddr& clientAddrCast = ( sockaddr& ) clientAddr;
@@ -1535,38 +1529,35 @@ string SipUtility::GetMessage( auto_ptr<SipMessage>& sipMessage, int sock )
 		throw SipServerException(string("No request found. ") + strerror(errno), "");
 
 	string data( buffer, received );
-	try
-	{
-		if ( boost::regex_match( data.c_str(), matches, requestRegex) )
-		{
-			//cout << ">>Request IN from " << inet_ntoa(clientAddr.sin_addr) << ":\n" << data << endl << endl;
-			sipMessage.reset( new SipRequest( data ) );
+	ParseMessage( sipMessage, data );
+		
+	return string( inet_ntoa(clientAddr.sin_addr) );
+}
 
+void SipUtility::ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data ) {
+	boost::regex requestRegex( "^\\s*(\\w+)\\ssip:(.+?)\\sSIP/2.0$\\r\\n.*" );
+	boost::regex responseRegex( "^\\s*SIP/2.0\\s(\\d{3})\\s(.*?)\\r\\n.*" );
+	boost::cmatch matches;
+
+	try {
+		if ( boost::regex_match( data.c_str(), matches, requestRegex) ) {
+			sipMessage.reset( new SipRequest( data ) );
 		}
-		else if ( boost::regex_match( data.c_str(), matches, responseRegex) )
-		{
-			//cout << ">>Response IN from " << inet_ntoa(clientAddr.sin_addr) << ":\n" << data << endl << endl;
+		else if ( boost::regex_match( data.c_str(), matches, responseRegex) ) {
 			sipMessage.reset( new SipResponse( data ) );
 		}
 		else
-		{
-			throw SipServerException( string( "Invalid SIP message received from " ) + inet_ntoa( clientAddr.sin_addr ) , data );
-		}
+			throw SipServerException( "SIP message not parseable", data );
 	}
-	catch ( SipRequestException& e )
-	{
+	catch ( SipRequestException& e ) {
 		throw SipServerException( string( "Invalid request:\n" ) + e.what(), data );
 	}
-	catch ( SipResponseException& e )
-	{
+	catch ( SipResponseException& e ) {
 		throw SipServerException( string( "Invalid response:\n" ) + e.what(), data );
 	}
-	catch ( SipMessageException& e )
-	{
+	catch ( SipMessageException& e ) {
 		throw SipServerException( string( "Invalid SIP message:\n" ) + e.what(), data );
 	}
-		
-	return string( inet_ntoa(clientAddr.sin_addr) );
 }
 
 void SipUtility::Respond( SipResponse& response )

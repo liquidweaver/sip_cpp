@@ -736,8 +736,24 @@ class SipServer
 class SipUtility
 {
 	public:
+		/** 
+		* @brief Reads the socket and calls ParseMessage on the contents.
+		* 
+		* @param sipMessage An auto_ptr<SipMessage> you would like to contain the SipMessage
+		* @param socket berkeley socket to read from
+		* 
+		* @return The IP address of the client.
+		*/
 		static string GetMessage( auto_ptr<SipMessage>& sipMessage, int socket );
 		
+		/** 
+		* @brief Parses a raw string into a SipMessage.
+		* 
+		* @param message an auto_ptr<SipMessage>
+		* @param data The raw string to parse
+		*/
+		static void ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data );
+
 		/**
 		 * \brief Sends a sip response. Will decrement max-forwards field.
 		 * \param response The response to send

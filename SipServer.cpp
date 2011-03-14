@@ -201,10 +201,9 @@ void Via::ParseFromSHV( const SipHeaderValue& shv )
 		if ( boost::regex_match( shv.Value().c_str(), matches, viaExpression ) )
 		{
 			string transportProtocolAsString( matches[1].first, matches[1].second );
-			transform( transportProtocolAsString.begin(), transportProtocolAsString.end(), transportProtocolAsString.begin(), (int(*)(int))tolower );
 			try
 			{
-				m_transportProtocol = TransportProtocolTypes.Get( transportProtocolAsString );
+				m_transportProtocol = TransportProtocolTypes.GetCase( transportProtocolAsString );
 				this->has_transportProtocol = true;
 			}
 			catch ( LookupTableException& e )
@@ -675,10 +674,9 @@ void CSeq::ParseCSeq( const string& rawValue ) throw( CSeqException )
 			throw CSeqException( string( "Invalid CSeq: " ) + rawValue );
 
 		m_requestMethodString = string( matches[2].first, matches[2].second );
-		transform( m_requestMethodString.begin(), m_requestMethodString.end(), m_requestMethodString.begin(), (int(*)(int))toupper ); //Go lowercase
 		try
 		{
-			m_requestMethod = RequestTypes.Get( m_requestMethodString );
+			m_requestMethod = RequestTypes.GetCase( m_requestMethodString );
 		}
 		catch ( LookupTableException& e )
 		{
@@ -1001,13 +999,13 @@ string SipMessage::ToString() const
 	//TODO: Maybe explicitly process via's first?
 	for ( vector<SipHeader>::const_iterator header = GetAllHeaders().begin(); header != GetAllHeaders().end(); ++header )
 	{
-		if ( header->header_name == "content-length" ) //This is calculated seperately and needs to be processed at the end
+		if ( strcasecmp( header->header_name.c_str(), "content-length" ) == 0 ) //This is calculated seperately and needs to be processed at the end
 			continue;
-		else if ( header->header_name == "via" ) //We handle via seperately because order is important, and we don't comma seperate multiple values, we put them on seperate lines
+		else if ( strcasecmp( header->header_name.c_str(), "via" ) == 0 ) //We handle via seperately because order is important, and we don't comma seperate multiple values, we put them on seperate lines
 		{
 			for ( vector<SipHeaderValue>::const_iterator value = header->shvs.begin(); value != header->shvs.end(); ++value  )
 			{
-				stream << "via: " << value->Value();
+				stream << header->header_name << ": " << value->Value();
 
 				if ( value->HasTags() )
 				{
@@ -1143,8 +1141,11 @@ void SipMessage::SetHeader( const string& headerName, const vector<SipHeaderValu
 		m_headers.push_back( SipHeader() );
 		header = m_headers.end() - 1;
 		header->header_name = headerName;
+		header->shvs = values;
 	}
-	header->shvs = values;
+	else {
+		header->shvs.insert( header->shvs.end(), values.begin(), values.end() );
+	}
 }
 
 void SipMessage::SetHeader( const string& headerName, const string& value ) throw()
@@ -1165,9 +1166,9 @@ void SipMessage::SetHeader( const string& headerName, const SipHeaderValue& valu
 
 string SipMessage::MassageHeaderKey( string headerName ) const throw()
 {
-	transform(headerName.begin(), headerName.end(), headerName.begin(), (int(*)(int))tolower ); //Go lowercase
+	//transform(headerName.begin(), headerName.end(), headerName.begin(), (int(*)(int))tolower ); //Go lowercase
 	if ( HeaderConversions.HasKey( headerName ) )
-		headerName = HeaderConversions.Get( headerName );
+		headerName = HeaderConversions.GetCase( headerName );
 
 	return headerName;
 }
@@ -1187,7 +1188,6 @@ void SipMessage::ProcessSipMessage( string::const_iterator start, string::const_
 
 	while ( boost::regex_search( start, end, regResults, headerExpression, boost::match_single_line ) == true )
 	{
-
 		key = MassageHeaderKey( string( regResults[1].first, regResults[1].second ) );
 		rawValue = string( regResults[2].first, regResults[2].second );
 
@@ -1201,7 +1201,6 @@ void SipMessage::ProcessSipMessage( string::const_iterator start, string::const_
 
 	if ( contentLength > 0 ) 	//Process content
 	{
-
 		if ( messageBody.length() != (unsigned)contentLength )
 			throw SipMessageException( "Content-length != actual body length...message corrupt" );
 
@@ -1212,8 +1211,6 @@ void SipMessage::ProcessSipMessage( string::const_iterator start, string::const_
 
 void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawString ) throw( SipMessageException )
 {
-
-
 	boost::regex ws( "\\r\\n" );
 	//Remove all CRLF's
 	rawString = boost::regex_replace( rawString, ws, "" );
@@ -1311,8 +1308,7 @@ SipRequest::SipRequest( const string& rawRequestData ) throw( SipMessageExceptio
 	try
 	{
 		m_requestURI = string( regResults[2].first, regResults[2].second );
-		transform(requestMethodString.begin(), requestMethodString.end(), requestMethodString.begin(), (int(*)(int))toupper ); //Go lowercase
-		this->requestMethod = RequestTypes.Get( requestMethodString );
+		this->requestMethod = RequestTypes.GetCase( requestMethodString );
 	}
 	catch ( LookupTableException& e )
 	{

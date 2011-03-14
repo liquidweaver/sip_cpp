@@ -12,6 +12,8 @@
 #ifndef LOOKUPTABLE_H
 #define LOOKUPTABLE_H
 #include <map>
+#include <algorithm> //transform
+#include <string> //tolower
 
 using namespace std;
 
@@ -81,6 +83,17 @@ template <class K, class V>
 				return ( *iter ).second;
 		}
 		
+		const V& GetCase ( const string& key ) const throw ( LookupTableException )
+		{
+			typename map<K, V>::const_iterator iter;
+			string lcase_key( key );
+			std::transform( lcase_key.begin(), lcase_key.end(), lcase_key.begin(), (int(*)(int)) tolower );
+			iter = table.find ( lcase_key );
+			if ( iter == table.end() )
+				throw LookupTableException ( "Key not found." );
+			else
+				return ( *iter ).second;
+		}
 		/**
 		 *     Returns a _key_ given a _value_
 		 * @warning This isn't terribly efficient, it has to iterate the entire map, so on avg O(N/2)
@@ -90,9 +103,22 @@ template <class K, class V>
 		const K& ReverseGet ( const V& value ) const throw ( LookupTableException )
 		{
 			typename map<K, V>::const_iterator iter;
-			for ( iter = table.begin(); iter != table.end(); ++iter )
-			{
+			for ( iter = table.begin(); iter != table.end(); ++iter ) {
 				if ( ( *iter ).second == value )
+					return ( *iter ).first;
+			}
+
+			throw LookupTableException ( "Value not found." );
+		}
+
+		const K& ReverseCaseGet( const string& value ) const throw( LookupTableException )
+		{
+			typename map<K, string>::const_iterator iter;
+			string lcase_value( value );
+			std::transform( lcase_value.begin(), lcase_value.end(), lcase_value.begin(), (int(*)(int)) tolower );
+
+			for ( iter = table.begin(); iter != table.end(); ++iter ) {
+				if ( ( *iter ).second == lcase_value )
 					return ( *iter ).first;
 			}
 

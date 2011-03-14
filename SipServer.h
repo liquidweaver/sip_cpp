@@ -795,21 +795,21 @@ class RequestTypesDef : public LookupTable<string, SipRequest::REQUEST_METHOD>
 	private:
 		void LoadValues()
 		{
-			table["REGISTER"] = SipRequest::REQUEST_METHOD_REGISTER;
-			table["INVITE"] = SipRequest::REQUEST_METHOD_INVITE;
-			table["SUBSCRIBE"] = SipRequest::REQUEST_METHOD_SUBSCRIBE;
-			table["PUBLISH"] = SipRequest::REQUEST_METHOD_PUBLISH;
-			table["ACK"] = SipRequest::REQUEST_METHOD_ACK;
-			table["PRACK"] = SipRequest::REQUEST_METHOD_PRACK;
-			table["CANCEL"] = SipRequest::REQUEST_METHOD_CANCEL;
-			table["BYE"] = SipRequest::REQUEST_METHOD_BYE;
-			table["OPTIONS"] = SipRequest::REQUEST_METHOD_OPTIONS;
-			table["MESSAGE"] = SipRequest::REQUEST_METHOD_MESSAGE;
-			table["REFER"] = SipRequest::REQUEST_METHOD_REFER;
-			table["NOTIFY"] = SipRequest::REQUEST_METHOD_NOTIFY;
-			table["INFO"] = SipRequest::REQUEST_METHOD_INFO;
-			table["FEATURE"] = SipRequest::REQUEST_METHOD_FEATURE;
-			table["UPDATE"] = SipRequest::REQUEST_METHOD_UPDATE;
+			table["register"] = SipRequest::REQUEST_METHOD_REGISTER;
+			table["invite"] = SipRequest::REQUEST_METHOD_INVITE;
+			table["subscribE"] = SipRequest::REQUEST_METHOD_SUBSCRIBE;
+			table["publish"] = SipRequest::REQUEST_METHOD_PUBLISH;
+			table["ack"] = SipRequest::REQUEST_METHOD_ACK;
+			table["prack"] = SipRequest::REQUEST_METHOD_PRACK;
+			table["cancel"] = SipRequest::REQUEST_METHOD_CANCEL;
+			table["bye"] = SipRequest::REQUEST_METHOD_BYE;
+			table["options"] = SipRequest::REQUEST_METHOD_OPTIONS;
+			table["message"] = SipRequest::REQUEST_METHOD_MESSAGE;
+			table["refer"] = SipRequest::REQUEST_METHOD_REFER;
+			table["notify"] = SipRequest::REQUEST_METHOD_NOTIFY;
+			table["info"] = SipRequest::REQUEST_METHOD_INFO;
+			table["feature"] = SipRequest::REQUEST_METHOD_FEATURE;
+			table["update"] = SipRequest::REQUEST_METHOD_UPDATE;
 		}
 };
 

@@ -319,6 +319,17 @@ string URI::URIAsString() const throw()
 	if ( this->has_port )
 		uriStringBuilder << ":" << m_port;
 
+	if ( this->m_URIParameters.size() > 0 ) {
+		uriStringBuilder << ';';
+
+		for ( map<string, string>::const_iterator param = m_URIParameters.begin();
+				param != m_URIParameters.end(); ++param ) {
+			uriStringBuilder << param->first << '=' << param->second;
+		}
+	}
+
+	if ( this->has_URIHeaders )
+		uriStringBuilder << "?" << m_URIHeaders;
 	uriStringBuilder << ">";
 
 	return uriStringBuilder.str();
@@ -461,11 +472,11 @@ void URI::ParseURI( const string& uriAsString ) throw( URIException )
 
 	//                                      1                         2          3           4        5                     6                   7
 	//                           [Optional Name           ]     [Prot] [Opt. User     ][Host    ][Opt. Port ][Opt.URI tags ][Opt. hdrs ]
-	boost::regex bracketedURI( "^((?:\".*?\")|(?:[^<\"]+))?\\s*<(\\w+):(?:([^<>@;]+)@)?([^<>;:]+)(?::(\\d+))?((?:;[^;?>]+)*)(?:\\?(.+))?>$" );
+	boost::regex bracketedURI( "^((?:\".*?\")|(?:[^<\"]+))?\\s*<(\\w+):(?:([^<>@;\\?]+)@)?([^<>;:\\?]+)(?::(\\d+))?((?:;[^;?>]+)*)(?:\\?(.+))?>$" );
 
-	//                               1         2             3           4                5                        6
+	//                               1         2          3         4            5            6
 	//								 [Proto  ] [Opt. User   ][Host    ][Opt.Port  ][Opt.URI tags][Opt. hdrs ]
-	boost::regex nakedURI( "^(^\\w+):(?:([^<>@;]+)@)?([^<>;:]+)(?::(\\d+))?((?:;[^;?]+)*)(?:\\?(.+))?$" );
+	boost::regex nakedURI( "^(^\\w+):(?:([^<>@;]+)@)?([^<>;:\\?]+)(?::(\\d+))?((?:;[^;?]+)*)(?:\\?(.+))?$" );
 	boost::cmatch matches;
 
 	if ( boost::regex_match( uriAsString.c_str(), matches, bracketedURI ) ) //Looks like a bracketed URI... might have a display name
@@ -714,7 +725,7 @@ SipHeaderValue::SipHeaderValue( const string& value,  map<string, string> tags) 
 SipHeaderValue::SipHeaderValue( const string& rawValue ) throw()
 	: m_hasTags( false ), m_value( rawValue )
 {
-	boost::regex semiURICheck( "^\\s*(?:\".*?\")?\\s*<" );
+	boost::regex semiURICheck( "^((?:\".*?\")|(?:[^<\"]+))?\\s*<" );
 	//Used to match with one or more tags
 	boost::regex tagsAreaMatch( "((?:;[^;\\?]+)*)(?:\\?.*)?$" );
 	//Ok, check if there is a uri that might so we can ignore inner semicolons
@@ -988,13 +999,13 @@ string SipMessage::ToString() const
 
 	//TODO: Add some sanity checking while creating stream
 	//TODO: Maybe explicitly process via's first?
-	for ( map< string, vector<SipHeaderValue> >::const_iterator header = GetAllHeaders().begin(); header != GetAllHeaders().end(); ++header )
+	for ( vector<SipHeader>::const_iterator header = GetAllHeaders().begin(); header != GetAllHeaders().end(); ++header )
 	{
-		if ( header->first == "content-length" ) //This is calculated seperately and needs to be processed at the end
+		if ( header->header_name == "content-length" ) //This is calculated seperately and needs to be processed at the end
 			continue;
-		else if ( header->first == "via" ) //We handle via seperately because order is important, and we don't comma seperate multiple values, we put them on seperate lines
+		else if ( header->header_name == "via" ) //We handle via seperately because order is important, and we don't comma seperate multiple values, we put them on seperate lines
 		{
-			for ( vector<SipHeaderValue>::const_iterator value = header->second.begin(); value != header->second.end(); ++value  )
+			for ( vector<SipHeaderValue>::const_iterator value = header->shvs.begin(); value != header->shvs.end(); ++value  )
 			{
 				stream << "via: " << value->Value();
 
@@ -1013,10 +1024,10 @@ string SipMessage::ToString() const
 		}
 		else //Process all other headers, seperating values with a comma SP combo
 		{
-			stream << header->first << ": ";
+			stream << header->header_name << ": ";
 			bool firstValue = true;
 
-			for ( vector<SipHeaderValue>::const_iterator value = header->second.begin(); value != header->second.end(); ++value  )
+			for ( vector<SipHeaderValue>::const_iterator value = header->shvs.begin(); value != header->shvs.end(); ++value  )
 			{
 				if ( firstValue )
 					firstValue = false;
@@ -1042,12 +1053,12 @@ string SipMessage::ToString() const
 
 	if ( HasMessageBody() )
 	{
-		stream << "content-length: " << GetMessageBody().length() << "\r\n\r\n";
+		stream << "Content-Length: " << GetMessageBody().length() << "\r\n\r\n";
 		stream << GetMessageBody();
 	}
 	else
 	{
-		stream << "content-length: 0" << "\r\n\r\n";
+		stream << "Content-Length: 0" << "\r\n\r\n";
 	}
 
 	return stream.str();
@@ -1060,18 +1071,16 @@ const string& SipMessage::GetOriginalRawMessage() const
 
 const vector<SipHeaderValue>& SipMessage::GetHeaderValues( const string& headerName ) const throw( SipMessageException )
 {
-	map<string, vector<SipHeaderValue> >::const_iterator it;
+	vector<SipHeader>::const_iterator it;
 
-	it = m_headers.find( headerName );
+	it = std::find( m_headers.begin(), m_headers.end(), headerName );
 	if ( it == m_headers.end() )
 		throw SipRequestException( string( "Header not present: " ) + headerName );
 	else
-	{
-		return it->second;
-	}
+		return it->shvs;
 }
 
-const map< string, vector<SipHeaderValue> >& SipMessage::GetAllHeaders() const throw()
+const vector<SipHeader>& SipMessage::GetAllHeaders() const throw()
 {
 	return m_headers;
 }
@@ -1087,7 +1096,7 @@ const string& SipMessage::GetMessageBody() const throw( SipMessageException )
 
 bool SipMessage::HasHeader( const string& headerName ) const throw()
 {
-	return ( m_headers.find( headerName ) != m_headers.end() );
+	return ( std::find( m_headers.begin(), m_headers.end(), headerName ) != m_headers.end() );
 }
 
 bool SipMessage::HasMessageBody ( ) const throw()
@@ -1106,27 +1115,36 @@ void SipMessage::SetMessageBody ( const string& body, const string& rtpMap ) thr
 
 		vector<SipHeaderValue> headerValues;
 		headerValues.push_back( SipHeaderValue( rtpMap ) );
-		m_headers[ "content-type" ] = headerValues;
+		SetHeader( "content-type",  headerValues );
 
 		headerValues.clear();
 		headerValues.push_back( SipHeaderValue(  lengthAsStringBuilder.str() ) );
-		m_headers[ "content-length" ] = headerValues;
+		SetHeader( "content-length", headerValues );
 
 		messageBody = body;
 		m_hasBody = true;
 }
 
-vector<SipHeaderValue>& SipMessage::ModifyHeader( const string& headerName) throw ( SipMessageException )
+vector<SipHeaderValue>& SipMessage::ModifyHeader( const string& headerName) 
 {
-	if ( m_headers.find( headerName ) == m_headers.end() )
-		throw SipRequestException( "Header not present: " + headerName );
-	else
-		return m_headers[headerName];
+	vector<SipHeader>::iterator header = std::find( m_headers.begin(), m_headers.end(), headerName );
+	if ( header == m_headers.end() ) {
+		m_headers.push_back( SipHeader() );
+		header = m_headers.end() - 1;
+		header->header_name = headerName;
+	}
+	return header->shvs;
 }
 
 void SipMessage::SetHeader( const string& headerName, const vector<SipHeaderValue>& values ) throw()
 {
-	m_headers[headerName] = values;
+	vector<SipHeader>::iterator header = std::find( m_headers.begin(), m_headers.end(), headerName );
+	if ( header == m_headers.end() ) {
+		m_headers.push_back( SipHeader() );
+		header = m_headers.end() - 1;
+		header->header_name = headerName;
+	}
+	header->shvs = values;
 }
 
 void SipMessage::SetHeader( const string& headerName, const string& value ) throw()
@@ -1134,7 +1152,7 @@ void SipMessage::SetHeader( const string& headerName, const string& value ) thro
 	vector<SipHeaderValue> valueVector;
 	valueVector.push_back( SipHeaderValue( value ) );
 
-	m_headers[headerName] = valueVector;
+	SetHeader( headerName, valueVector );
 }
 
 void SipMessage::SetHeader( const string& headerName, const SipHeaderValue& value ) throw()
@@ -1142,7 +1160,7 @@ void SipMessage::SetHeader( const string& headerName, const SipHeaderValue& valu
 	vector<SipHeaderValue> valueVector;
 	valueVector.push_back( value );
 
-	m_headers[headerName] = valueVector;
+	SetHeader( headerName, valueVector );
 }
 
 string SipMessage::MassageHeaderKey( string headerName ) const throw()
@@ -1182,7 +1200,7 @@ void SipMessage::ProcessSipMessage( string::const_iterator start, string::const_
 	int contentLength = 0;
 
 	if ( this->HasHeader( "content-length" ) )
-		contentLength = atoi( m_headers["content-length"][0].Value().c_str() );
+		contentLength = atoi( GetHeaderValues("content-length")[0].Value().c_str() );
 
 	if ( contentLength > 0 ) 	//Process content
 	{
@@ -1264,10 +1282,10 @@ void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawSt
 		{
 			map<string, string> tagMap;
 			FillTags( rawTags, tagMap );
-			m_headers[headerName].push_back( SipHeaderValue( value, tagMap ) );
+			SetHeader( headerName, SipHeaderValue( value, tagMap ) );
 		}
 		else
-			m_headers[headerName].push_back( SipHeaderValue( value ) );
+			SetHeader( headerName, SipHeaderValue( value ) );
 	}
 }
 
@@ -1320,14 +1338,14 @@ SipRequest::SipRequest( const string& rawRequestData ) throw( SipMessageExceptio
 				 ! this->HasHeader( "via" ) )
 		throw SipRequestException( "Invalid SIP request recieved, critical headers missing." );
 
-	if ( this->requestMethod == REQUEST_METHOD_INVITE && !m_headers[ "from" ][0].HasTag( "tag" ) )
+	if ( this->requestMethod == REQUEST_METHOD_INVITE && !GetHeaderValues( "from" )[0].HasTag( "tag" ) )
 	{
 		throw SipRequestException( "'from' does not have a tag and request method is INVITE" ); //This should be an error: RFC 3261:8.1.1.3, Para. 4
 		//cerr << "Warning: 'from' with no tag: " << m_headers[ "from" ][0].Value() << endl;
 	}
 
 	//CSeq method must match request method
-	if ( static_cast<CSeq>(m_headers["cseq"][0]).RequestMethod() != this->requestMethod )
+	if ( static_cast<CSeq>(GetHeaderValues( "cseq" )[0]).RequestMethod() != this->requestMethod )
 		throw SipRequestException( "CSeq request method doesn't match request method of request." );
 
 
@@ -1348,33 +1366,7 @@ SipRequest::SipRequest( const SipRequest& rhs ) : SipMessage( MT_REQUEST )
 	this->requestMethod = rhs.requestMethod;
 	m_requestURI = rhs.m_requestURI;
 
-    if ( rhs.HasHeader( "via" ) )
-    	m_headers["via"] = rhs.GetHeaderValues("via");
-
-    if ( rhs.HasHeader( "cseq" ) )
-        m_headers["cseq"] = rhs.GetHeaderValues("cseq");
-
-    if ( rhs.HasHeader( "call-id" ) )
-        m_headers["call-id"] = rhs.GetHeaderValues("call-id");
-
-    if ( rhs.HasHeader( "to" ) )
-        m_headers["to"] = rhs.GetHeaderValues("to");
-
-    if ( rhs.HasHeader( "from" ) )
-        m_headers["from"] = rhs.GetHeaderValues("from");
-
-    if (rhs.HasHeader( "content-length" ) )
-        m_headers["content-length"] = rhs.GetHeaderValues("content-length");
-
-	if ( rhs.HasHeader( "contact" ) )
-		m_headers["contact"] = rhs.GetHeaderValues("contact"); //May want to remove this to force proxying at some point
-
-	if ( rhs.HasHeader( "content-type" ) )
-		m_headers["content-type"] = rhs.GetHeaderValues("content-type");
-
-	if ( rhs.HasHeader( "refer-to" ) )
-		m_headers["refer-to"] = rhs.GetHeaderValues("refer-to");
-
+	m_headers = rhs.m_headers;
 	m_hasBody = rhs.m_hasBody;
 	this->messageBody = rhs.messageBody;
 
@@ -1404,11 +1396,11 @@ void SipRequest::SetRequestMethod( const SipRequest::REQUEST_METHOD rm ) throw()
 		ostringstream cseqBuilder;
 		string requestMethod = RequestTypes.ReverseGet( rm );
 		transform( requestMethod.begin(), requestMethod.end(), requestMethod.begin(), (int(*)(int))toupper ); //Go uppercase
-		cseqBuilder << CSeq( m_headers["cseq"][0] ).Sequence()
+		cseqBuilder << CSeq( GetHeaderValues( "cseq" )[0] ).Sequence()
 						<< ' '
 						<< requestMethod;
 
-		m_headers["cseq"][0] = cseqBuilder.str();
+		SetHeader( "cseq", cseqBuilder.str() );
 	}
 }
 
@@ -1456,11 +1448,11 @@ SipResponse::SipResponse( const int statusCode, const string& reasonPhrase, cons
 { //See RFC 3261, 8.2.6.2
 	try
 	{
-		m_headers["via"] = request.GetHeaderValues( "via" );
-		m_headers["from"] = request.GetHeaderValues( "from" );
-		m_headers["call-id"] = request.GetHeaderValues( "call-id" );
-		m_headers["cseq"] = request.GetHeaderValues( "cseq" );
-		m_headers["to"] = request.GetHeaderValues( "to" );
+		SetHeader( "via", request.GetHeaderValues( "via" ) );
+		SetHeader( "from", request.GetHeaderValues( "from" ) );
+		SetHeader( "call-id", request.GetHeaderValues( "call-id" ) );
+		SetHeader( "cseq", request.GetHeaderValues( "cseq" ) );
+		SetHeader( "to", request.GetHeaderValues( "to" ) );
 	}
 	catch( SipRequestException&e )
 	{

@@ -45,6 +45,7 @@
 #include <queue>
 #include <memory>
 #include "lookuptable.h"
+#include <string.h> //strcasecmp
 
 using namespace std;
 
@@ -301,6 +302,21 @@ class SipHeaderValue
 		map<string, string> m_tags;
 };
 
+/** 
+ * \class SipHeader
+* \brief A single sip header.
+*/
+class SipHeader
+{
+	public:
+		string header_name;
+		vector<SipHeaderValue> shvs;
+
+		bool operator==( const string& header_name ) const {
+			return !( strcasecmp( this->header_name.c_str(), header_name.c_str() ) );
+		}
+};
+
 /**
 * \class Via
 * \brief Creates a usable Via object from a generic SipHeaderValue
@@ -421,10 +437,10 @@ class SipMessage
 		const vector<SipHeaderValue>& GetHeaderValues ( const string& headerName ) const throw ( SipMessageException );
 
 		/**
-		 *     Allows you to enumarte all headers
-		 * @return A const reference to the map of headers with vectors of SipHeaderValue
+		 *     Allows you to enumerate all headers
+		 * @return A const reference to the vector of SipHeader's
 		 */
-		const map< string, vector<SipHeaderValue> >& GetAllHeaders() const throw();
+		const vector<SipHeader>& GetAllHeaders() const throw();
 
 		/**
 		 *     Returns the message body, if there is one->messageQueue.push_back( message );
@@ -452,11 +468,11 @@ class SipMessage
 		void SetMessageBody ( const string& body, const string& rtpMap ) throw( SipMessageException );
 
 		/**
-		 *     Returns an reference to a header so it's values may be modified
+		 *     Returns an reference to a header so it's values may be modified. If header doesn't exist, it is added.
 		 * @param headerName The header to modify
 		 * @return A reference to the vector<SipHeaderValue> indicated by the header.
 		 */
-		vector<SipHeaderValue>& ModifyHeader( const string& headerName) throw ( SipMessageException );
+		vector<SipHeaderValue>& ModifyHeader( const string& headerName);
 
 		/**
 		 * 	Adds or replaces a header referenced with the values given
@@ -506,7 +522,7 @@ class SipMessage
 		string messageBody, rawMessage;
 		string m_recvAddress;
 		bool m_hasBody, m_hasRecvAddress;
-		map< string, vector<SipHeaderValue> > m_headers;
+		vector<SipHeader> m_headers;
 
 	private:
 		SipMessage() {}

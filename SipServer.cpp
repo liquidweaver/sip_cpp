@@ -1141,11 +1141,8 @@ void SipMessage::SetHeader( const string& headerName, const vector<SipHeaderValu
 		m_headers.push_back( SipHeader() );
 		header = m_headers.end() - 1;
 		header->header_name = headerName;
-		header->shvs = values;
 	}
-	else {
-		header->shvs.insert( header->shvs.end(), values.begin(), values.end() );
-	}
+	header->shvs = values;
 }
 
 void SipMessage::SetHeader( const string& headerName, const string& value ) throw()
@@ -1162,6 +1159,43 @@ void SipMessage::SetHeader( const string& headerName, const SipHeaderValue& valu
 	valueVector.push_back( value );
 
 	SetHeader( headerName, valueVector );
+}
+
+void SipMessage::PushHeader( const string& headerName, const vector<SipHeaderValue>& values ) throw()
+{
+	vector<SipHeader>::iterator header = std::find( m_headers.begin(), m_headers.end(), headerName );
+	if ( header == m_headers.end() ) {
+		m_headers.push_back( SipHeader() );
+		header = m_headers.end() - 1;
+		header->header_name = headerName;
+		header->shvs = values;
+	}
+	else {
+		header->shvs.insert( header->shvs.end(), values.begin(), values.end() );
+	}
+}
+
+void SipMessage::PushHeader( const string& headerName, const string& value ) throw()
+{
+	vector<SipHeaderValue> valueVector;
+	valueVector.push_back( SipHeaderValue( value ) );
+
+	PushHeader( headerName, valueVector );
+}
+
+void SipMessage::PushHeader( const string& headerName, const SipHeaderValue& value ) throw()
+{
+	vector<SipHeaderValue> valueVector;
+	valueVector.push_back( value );
+
+	PushHeader( headerName, valueVector );
+}
+
+void SipMessage::DeleteHeader( const string& headerName ) throw() {
+	vector<SipHeader>::iterator header = std::find( m_headers.begin(), m_headers.end(), headerName );
+	if ( header != m_headers.end() ) {
+		m_headers.erase( header );
+	}
 }
 
 string SipMessage::MassageHeaderKey( string headerName ) const throw()
@@ -1276,10 +1310,10 @@ void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawSt
 		{
 			map<string, string> tagMap;
 			FillTags( rawTags, tagMap );
-			SetHeader( headerName, SipHeaderValue( value, tagMap ) );
+			PushHeader( headerName, SipHeaderValue( value, tagMap ) );
 		}
 		else
-			SetHeader( headerName, SipHeaderValue( value ) );
+			PushHeader( headerName, SipHeaderValue( value ) );
 	}
 }
 

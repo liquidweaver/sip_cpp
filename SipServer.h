@@ -475,13 +475,29 @@ class SipMessage
 		vector<SipHeaderValue>& ModifyHeader( const string& headerName);
 
 		/**
-		 * 	Adds or replaces a header referenced with the values given
+		 * 	Replaces or sets a header referenced with the values given
 		 * @param headerName The name of the header to add/replace
 		 * @param values The value(s) to go along with it
 		 */
 		void SetHeader( const string& headerName, const vector<SipHeaderValue>& values ) throw();
 		void SetHeader( const string& headerName, const string& value ) throw();
 		void SetHeader( const string& headerName, const SipHeaderValue& value ) throw();
+		/** 
+		* @brief Adds to or sets a header with the given vector<SipHeaderValue>
+		* 
+		* @param headerName
+		* @param 
+		*/
+		void PushHeader( const string& headerName, const vector<SipHeaderValue>& values ) throw();
+		void PushHeader( const string& headerName, const string& value ) throw();
+		void PushHeader( const string& headerName, const SipHeaderValue& value ) throw();
+
+		/** 
+		* @brief Deletes a header
+		* 
+		* @headerName A string representing the header name. Case insensitive matching is performed. 
+		*/
+		void DeleteHeader( const string& headerName ) throw();
 		/**
 		*     Utility function for transforming a string of key & value tags into a map of tags
 		* @param rawTags A string representations of one or more tags in the format (;key=value)*

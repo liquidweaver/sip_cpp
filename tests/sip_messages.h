@@ -74,5 +74,35 @@ const char* sip_messages[] = {
 "a=fmtp:18 annexb=no\r\n"
 "a=rtpmap:101 telephone-event/8000\r\n",
 
+"INVITE sip:2278@172.21.1.234;user=phone SIP/2.0\r\n"
+"Via: SIP/2.0/UDP 172.21.1.243;branch=z9hG4bKecdfd2f9F1382E9C\r\n"
+"From: \"Test Jones\" <sip:2100@172.21.1.234>;tag=679D6B20-6C4A13CF\r\n"
+"To: <sip:2278@172.21.1.234;user=phone>\r\n"
+"CSeq: 1 INVITE\r\n"
+"Call-ID: a3cf04fb-694454c6-c808226d@172.21.1.243\r\n"
+"Contact: <sip:2100@172.21.1.243>\r\n"
+"Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, INFO, MESSAGE, SUBSCRIBE, NOTIFY, PRACK, UPDATE, REFER\r\n"
+"User-Agent: PolycomSoundPointIP-SPIP_650-UA/3.1.3.0439\r\n"
+"Accept-Language: en\r\n"
+"Supported: 100rel,replaces\r\n"
+"Allow-Events: talk,hold,conference\r\n"
+"Max-Forwards: 70\r\n"
+"Content-Type: application/sdp\r\n"
+"Content-Length: 294\r\n"
+"\r\n"
+"v=0\r\n"
+"o=- 1167609879 1167609879 IN IP4 172.21.1.243\r\n"
+"s=Polycom IP Phone\r\n"
+"c=IN IP4 172.21.1.243\r\n"
+"t=0 0\r\n"
+"a=sendrecv\r\n"
+"m=audio 2222 RTP/AVP 9 0 8 18 101\r\n"
+"a=rtpmap:9 G722/8000\r\n"
+"a=rtpmap:0 PCMU/8000\r\n"
+"a=rtpmap:8 PCMA/8000\r\n"
+"a=rtpmap:18 G729/8000\r\n"
+"a=fmtp:18 annexb=no\r\n"
+"a=rtpmap:101 telephone-event/8000\r\n",
+
 NULL
 };

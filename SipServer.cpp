@@ -1092,6 +1092,13 @@ const string& SipMessage::GetMessageBody() const throw( SipMessageException )
 		return this->messageBody;
 }
 
+string& SipMessage::ModifyMessageBody() throw ( SipMessageException ) {
+	if ( ! m_hasBody )
+		throw SipMessageException( string( "ModifyMessageBody: Message has no body" ) + rawMessage  );
+	else
+		return this->messageBody;
+}
+
 bool SipMessage::HasHeader( const string& headerName ) const throw()
 {
 	return ( std::find( m_headers.begin(), m_headers.end(), headerName ) != m_headers.end() );

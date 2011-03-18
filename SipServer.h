@@ -448,6 +448,7 @@ class SipMessage
 		 * @throw SipMessageException is there isn't a body to get
 		 */
 		const string& GetMessageBody() const throw( SipMessageException );
+		string& ModifyMessageBody() throw ( SipMessageException );
 
 		/**
 		*     Does a specific SIP header exist
@@ -813,7 +814,7 @@ class RequestTypesDef : public LookupTable<string, SipRequest::REQUEST_METHOD>
 		{
 			table["register"] = SipRequest::REQUEST_METHOD_REGISTER;
 			table["invite"] = SipRequest::REQUEST_METHOD_INVITE;
-			table["subscribE"] = SipRequest::REQUEST_METHOD_SUBSCRIBE;
+			table["subscribe"] = SipRequest::REQUEST_METHOD_SUBSCRIBE;
 			table["publish"] = SipRequest::REQUEST_METHOD_PUBLISH;
 			table["ack"] = SipRequest::REQUEST_METHOD_ACK;
 			table["prack"] = SipRequest::REQUEST_METHOD_PRACK;

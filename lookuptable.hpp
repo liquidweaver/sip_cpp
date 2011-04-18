@@ -9,8 +9,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#ifndef LOOKUPTABLE_H
-#define LOOKUPTABLE_H
+#ifndef LOOKUPTABLE_HPP
+#define LOOKUPTABLE_HPP
 #include <map>
 #include <algorithm> //transform
 #include <string> //tolower

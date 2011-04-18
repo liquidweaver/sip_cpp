@@ -1,0 +1,217 @@
+/****************************************************************************
+*   Copyright (C) 2009 by Joshua weaver									*
+*   joshuaweaver@gmail.com													*
+*																			*
+*   All rights reserved.													*
+*																			*
+*   Redistribution and use in source and binary forms, with or without		*
+*	modification, are permitted provided that the following conditions are 	*
+*	met:																	*
+*		* Redistributions of source code must retain the above copyright 	*
+*		  notice, this list of conditions and the following disclaimer.		*
+*		* Redistributions in binary form must reproduce the above copyright	*
+*		  notice, this list of conditions and the following disclaimer in 	*
+*		  the documentation and/or other materials provided with the 		*
+*		  distribution.														*
+*     * Neither the name of the <ORGANIZATION> nor the names of its 		*
+*		 contributors may be used to endorse or promote products derived 	*
+*		 from this software without specific prior written permission.		*
+*																			*
+*	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS		*
+*	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT		*
+*	LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR	*
+*	A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 	*
+*	OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 	*
+*	SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 		*
+*	LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 	*
+*	DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY	*
+*	THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 	*
+*	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE	*
+*	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.	*
+***************************************************************************/
+
+#ifndef SIPSERVER_H
+#define SIPSERVER_H
+
+#include <string>
+#include <exception>
+#include <map>
+#include <vector>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <string>
+#include <arpa/inet.h>
+#include <queue>
+#include <memory>
+#include "lookuptable.h"
+#include <string.h> //strcasecmp
+
+using namespace std;
+
+
+namespace Sip
+{
+
+
+//
+// Utility functions
+//
+
+string RandomString( int length );
+
+//
+// Exception Classes
+//
+
+/**
+* \class SipServerException
+* \brief standard exception class for SipServer
+*/
+class SipServerException : public exception
+{
+	public:
+		SipServerException ( std::string what, std::string message ) throw()
+			: m_s ( what ), m_m( message) {}
+		~SipServerException () throw() {}
+
+		virtual const char * what() const throw()  { return m_s.c_str(); }
+
+		string originalMessage() throw() { return m_m; }
+
+	private:
+
+		string m_s, m_m;
+
+};
+
+/**
+ * \class SipServerException
+ * \brief standard exception class for SipServer
+ */
+class SipServerTimeout : public exception
+{
+	public:
+		SipServerTimeout ( std::string what ) throw()
+	: m_s ( what ) {}
+		~SipServerTimeout () throw() {}
+
+		virtual const char * what() const throw()  { return m_s.c_str(); }
+
+	private:
+
+		string m_s;
+
+};
+
+/**
+* \class SipProtocolException
+* \brief standard exception class for SipProtocol
+*/
+class SipProtocolException : public std::exception
+{
+	public:
+		SipProtocolException ( std::string code, std::string description ) throw()
+				: m_code ( code ), m_desc ( description ) {};
+		~SipProtocolException () throw() {}
+
+		std::string code() throw() { return m_code; }
+		virtual const char * what() const throw() { return m_desc.c_str(); }
+
+	private:
+
+		std::string m_code;
+		std::string m_desc;
+
+};
+
+/**
+* \class SipServer
+* \brief Creates a class capable of translating raw SIP requests, UDP @ port 5060, to easily parseable data types. Also allows communication outwards to SIP UAS/UAC's
+*/
+class SipServer
+{
+	public:
+		SipServer( int UDPPort = DEFAULT_UDP_LISTENPORT ) throw ( SipServerException );
+
+		/**
+		 *     Waits for a SIP datagram.
+		 * @return The address the SipMessage was received from
+		 * @param sipMessage An auto_ptr to a sip message. This will be re-assigned to the SipMessage received
+		 * @todo Forward requests not meant for this-host
+		 */
+		string Accept( auto_ptr<SipMessage>& sipMessage );
+
+		/**
+		 * \brief Sends a sip response. Will decrement max-forwards field.
+		 * \param response The response to send
+		 * \throw SipServerException if errors processing message, or max-forwards is 0
+		 */
+		void Respond( SipResponse& response ) const;
+
+		/**
+		 * \brief Sends a sip request. Will decrement max-forwards field.
+		 * \param request The response to send
+		 * \throw SipServerException if errors processing message, or max-forwards is 0
+		 */
+		void Request( SipRequest& request ) const;
+
+		int UDPPort() const throw();
+
+	private:
+
+		int 		m_sock;
+		int		m_udpPort;
+		sockaddr_in	m_serverAddr;
+
+};
+
+
+class SipUtility
+{
+	public:
+		/** 
+		* @brief Reads the socket and calls ParseMessage on the contents.
+		* 
+		* @param sipMessage An auto_ptr<SipMessage> you would like to contain the SipMessage
+		* @param socket berkeley socket to read from
+		* 
+		* @return The IP address of the client.
+		*/
+		static string GetMessage( auto_ptr<SipMessage>& sipMessage, int socket );
+		
+		/** 
+		* @brief Parses a raw string into a SipMessage.
+		* 
+		* @param message an auto_ptr<SipMessage>
+		* @param data The raw string to parse
+		*/
+		static void ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data );
+
+		/**
+		 * \brief Sends a sip response. Will decrement max-forwards field.
+		 * \param response The response to send
+		 * \throw SipServerException if errors processing message, or max-forwards is 0
+		 */
+		static void Respond( SipResponse& response );
+		
+		/**
+		 * \brief Sends a sip request. Will decrement max-forwards field.
+		 * \param request The response to send
+		 * \throw SipServerException if errors processing message, or max-forwards is 0
+		 */
+		static void Request( SipRequest& request );
+	private:
+		static void SendSipMessage( const string& rawMessage, const URI& recipient );
+		
+		/**
+		 * \brief Decrements the max-forwards header.
+		 * \param mesg The SipMessage to operate on.
+		 * \throw If max-forwards <= 0
+		 */
+		static void DecrementForwards( SipMessage& mesg );
+};
+
+
+} //namespace Sip
+#endif

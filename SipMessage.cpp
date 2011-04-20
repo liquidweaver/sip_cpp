@@ -367,4 +367,8 @@ static void CSVSeperate( const string& rawString, queue<string>& elements )
 		elements.push( currentString );
 }
 
+//
+// UTILITY
+// 
+
 }; //namespace Sip

@@ -1,12 +1,14 @@
 #include <boost/test/unit_test.hpp>
 #include <sstream>
-#include "../SipServer.h"
+#include "../SipUtility.hpp"
+#include "../SipRequest.hpp"
+#include "../SipResponse.hpp"
 //http://code.google.com/p/dtl-cpp/
 #include "dtl/dtl.hpp"
 
 #include "sip_messages.h"
 using namespace Sip;
-
+using namespace std;
 void check_differences( const string& original, const string& render, const int& i ) {
 	dtl::Diff< char, string > d( original, render );
 	d.compose();
@@ -37,6 +39,7 @@ void check_differences( const string& original, const string& render, const int&
 		BOOST_WARN_MESSAGE( false, output.str() );
 	}
 }
+
 BOOST_AUTO_TEST_CASE( invites ) {
 	int i = 0;
 	for ( const char* sip_message = sip_messages[i];
@@ -44,7 +47,7 @@ BOOST_AUTO_TEST_CASE( invites ) {
 
 		auto_ptr<Sip::SipMessage> this_message;
 		string original_message( sip_message );
-		BOOST_REQUIRE_NO_THROW( SipUtility::ParseMessage( this_message, sip_message ) );			
+		BOOST_REQUIRE_NO_THROW( Utility::ParseMessage( this_message, sip_message ) );			
 		if ( this_message->Type == SipMessage::MT_REQUEST ) {
 			SipRequest& request = static_cast<SipRequest&>( *this_message );
 			check_differences( original_message, request.ToString(), i );

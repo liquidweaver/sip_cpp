@@ -1,0 +1,344 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+A	dtl/Diff.hpp	/^        sequence           A;$/;"	m	class:dtl::Diff	access:private
+A	dtl/Diff3.hpp	/^        sequence                           A;$/;"	m	class:dtl::Diff3	access:private
+B	dtl/Diff.hpp	/^        sequence           B;$/;"	m	class:dtl::Diff	access:private
+B	dtl/Diff3.hpp	/^        sequence                           B;$/;"	m	class:dtl::Diff3	access:private
+BOOST_AUTO_TEST_CASE	parse_tests.cpp	/^BOOST_AUTO_TEST_CASE( invites ) {$/;"	f	signature:( invites )
+BOOST_AUTO_TEST_CASE	registrar.cpp	/^BOOST_AUTO_TEST_CASE( registration ) {$/;"	f	signature:( registration )
+BOOST_TEST_DYN_LINK	TestRunner.cpp	1;"	d	file:
+BOOST_TEST_MODULE	TestRunner.cpp	2;"	d	file:
+C	dtl/Diff3.hpp	/^        sequence                           C;$/;"	m	class:dtl::Diff3	access:private
+ChangePrinter	dtl/functors.hpp	/^        ChangePrinter  ()            : Printer < sesElem, stream > ()    {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:()
+ChangePrinter	dtl/functors.hpp	/^        ChangePrinter  (stream& out) : Printer < sesElem, stream > (out) {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:(stream& out)
+ChangePrinter	dtl/functors.hpp	/^    class ChangePrinter : public Printer < sesElem, stream >$/;"	c	namespace:dtl	inherits:Printer
+CommonPrinter	dtl/functors.hpp	/^        CommonPrinter  ()            : Printer < sesElem, stream > ()    {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:()
+CommonPrinter	dtl/functors.hpp	/^        CommonPrinter  (stream& out) : Printer < sesElem, stream > (out) {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:(stream& out)
+CommonPrinter	dtl/functors.hpp	/^    class CommonPrinter : public Printer < sesElem, stream >$/;"	c	namespace:dtl	inherits:Printer
+Compare	dtl/functors.hpp	/^        Compare () {}$/;"	f	class:dtl::Compare	access:public	signature:()
+Compare	dtl/functors.hpp	/^    class Compare$/;"	c	namespace:dtl
+DTL_CONTEXT_SIZE	dtl/variables.hpp	/^    const long long DTL_CONTEXT_SIZE  = 3;$/;"	m	namespace:dtl
+DTL_DIFF3_H	dtl/Diff3.hpp	39;"	d
+DTL_DIFF_H	dtl/Diff.hpp	39;"	d
+DTL_FUNCTORS_H	dtl/functors.hpp	39;"	d
+DTL_H	dtl/dtl.hpp	37;"	d
+DTL_LCS_H	dtl/Lcs.hpp	39;"	d
+DTL_SEPARATE_SIZE	dtl/variables.hpp	/^    const long long DTL_SEPARATE_SIZE = 3;$/;"	m	namespace:dtl
+DTL_SEQUENCE_H	dtl/Sequence.hpp	39;"	d
+DTL_SES_H	dtl/Ses.hpp	39;"	d
+DTL_VARIABLES_H	dtl/variables.hpp	39;"	d
+Diff	dtl/Diff.hpp	/^        Diff () {}$/;"	f	class:dtl::Diff	access:public	signature:()
+Diff	dtl/Diff.hpp	/^        Diff (const sequence& a, $/;"	f	class:dtl::Diff	access:public	signature:(const sequence& a, const sequence& b)
+Diff	dtl/Diff.hpp	/^        Diff (const sequence& a, $/;"	f	class:dtl::Diff	access:public	signature:(const sequence& a, const sequence& b, const comparator& comp)
+Diff	dtl/Diff.hpp	/^    class Diff$/;"	c	namespace:dtl
+Diff3	dtl/Diff3.hpp	/^        Diff3 () {}$/;"	f	class:dtl::Diff3	access:public	signature:()
+Diff3	dtl/Diff3.hpp	/^        Diff3 (const sequence& a, $/;"	f	class:dtl::Diff3	access:public	signature:(const sequence& a, const sequence& b, const sequence& c)
+Diff3	dtl/Diff3.hpp	/^    class Diff3$/;"	c	namespace:dtl
+Lcs	dtl/Lcs.hpp	/^        Lcs ()  {}$/;"	f	class:dtl::Lcs	access:public	signature:()
+Lcs	dtl/Lcs.hpp	/^    class Lcs : public Sequence< elem >$/;"	c	namespace:dtl	inherits:Sequence
+M	dtl/Diff.hpp	/^        size_t             M;$/;"	m	class:dtl::Diff	access:private
+MAX_CORDINATES_SIZE	dtl/variables.hpp	/^    const unsigned long long MAX_CORDINATES_SIZE = 2000000;$/;"	m	namespace:dtl
+N	dtl/Diff.hpp	/^        size_t             N;$/;"	m	class:dtl::Diff	access:private
+P	dtl/variables.hpp	/^    } P;$/;"	t	namespace:dtl	typeref:struct:dtl::Point
+Point	dtl/variables.hpp	/^    typedef struct Point {$/;"	s	namespace:dtl
+Printer	dtl/functors.hpp	/^        Printer ()            : out_(cout) {}$/;"	f	class:dtl::Printer	access:public	signature:()
+Printer	dtl/functors.hpp	/^        Printer (stream& out) : out_(out)  {}$/;"	f	class:dtl::Printer	access:public	signature:(stream& out)
+Printer	dtl/functors.hpp	/^    class Printer$/;"	c	namespace:dtl
+S	dtl/Diff3.hpp	/^        sequence                           S;$/;"	m	class:dtl::Diff3	access:private
+SES_ADD	dtl/variables.hpp	/^    const   edit_t SES_ADD    = 1;$/;"	m	namespace:dtl
+SES_COMMON	dtl/variables.hpp	/^    const   edit_t SES_COMMON = 0;$/;"	m	namespace:dtl
+SES_DELETE	dtl/variables.hpp	/^    const   edit_t SES_DELETE = -1;$/;"	m	namespace:dtl
+SES_MARK_ADD	dtl/variables.hpp	76;"	d
+SES_MARK_COMMON	dtl/variables.hpp	75;"	d
+SES_MARK_DELETE	dtl/variables.hpp	74;"	d
+Sequence	dtl/Sequence.hpp	/^        Sequence () {}$/;"	f	class:dtl::Sequence	access:public	signature:()
+Sequence	dtl/Sequence.hpp	/^    class Sequence$/;"	c	namespace:dtl
+Ses	dtl/Ses.hpp	/^        Ses () : onlyAdd(true), onlyDelete(true), onlyCopy(true) { }$/;"	f	class:dtl::Ses	access:public	signature:()
+Ses	dtl/Ses.hpp	/^    class Ses : public Sequence< elem >$/;"	c	namespace:dtl	inherits:Sequence
+UniHunkPrinter	dtl/functors.hpp	/^        UniHunkPrinter  ()            : out_(cout) {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:()
+UniHunkPrinter	dtl/functors.hpp	/^        UniHunkPrinter  (stream& out) : out_(out)  {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:(stream& out)
+UniHunkPrinter	dtl/functors.hpp	/^    class UniHunkPrinter$/;"	c	namespace:dtl
+a	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+addDecentSequence	dtl/Diff3.hpp	/^        void inline addDecentSequence (const sesElemVec_iter& end, sesElemVec_iter& it, elemVec& seq) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const sesElemVec_iter& end, sesElemVec_iter& it, elemVec& seq) const
+addSequence	dtl/Sequence.hpp	/^        void addSequence (elem e) {$/;"	f	class:dtl::Sequence	access:public	signature:(elem e)
+addSequence	dtl/Ses.hpp	/^        void addSequence (elem e, long long beforeIdx, long long afterIdx, const edit_t type) {$/;"	f	class:dtl::Ses	access:public	signature:(elem e, long long beforeIdx, long long afterIdx, const edit_t type)
+afterIdx	dtl/variables.hpp	/^        long long afterIdx;            \/\/ index of after sequence$/;"	m	struct:dtl::eleminfo	access:public
+b	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+beforeIdx	dtl/variables.hpp	/^        long long beforeIdx;           \/\/ index of prev sequence$/;"	m	struct:dtl::eleminfo	access:public
+c	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+change	dtl/variables.hpp	/^        vector< sesElem > change;    \/\/ changes$/;"	m	struct:dtl::uniHunk	access:public
+check_differences	parse_tests.cpp	/^void check_differences( const string& original, const string& render, const int& i ) {$/;"	f	signature:( const string& original, const string& render, const int& i )
+cmp	dtl/Diff.hpp	/^        comparator         cmp;$/;"	m	class:dtl::Diff	access:private
+common	dtl/variables.hpp	/^        vector< sesElem > common[2]; \/\/ anteroposterior commons on changes$/;"	m	struct:dtl::uniHunk	access:public
+compose	dtl/Diff.hpp	/^        void compose() {$/;"	f	class:dtl::Diff	access:public	signature:()
+compose	dtl/Diff3.hpp	/^        void compose () {$/;"	f	class:dtl::Diff3	access:public	signature:()
+composeSesFromStream	dtl/Diff.hpp	/^        static Ses< elem > composeSesFromStream (stream& st)$/;"	f	class:dtl::Diff	access:public	signature:(stream& st)
+composeUnifiedHunks	dtl/Diff.hpp	/^        void composeUnifiedHunks () {$/;"	f	class:dtl::Diff	access:public	signature:()
+conflict	dtl/Diff3.hpp	/^        bool                               conflict;$/;"	m	class:dtl::Diff3	access:private
+csepa	dtl/Diff3.hpp	/^        elem                               csepa;$/;"	m	class:dtl::Diff3	access:private
+csepabegin	dtl/Diff3.hpp	/^        elem                               csepabegin;$/;"	m	class:dtl::Diff3	access:private
+csepaend	dtl/Diff3.hpp	/^        elem                               csepaend;$/;"	m	class:dtl::Diff3	access:private
+d	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+delta	dtl/Diff.hpp	/^        size_t             delta;$/;"	m	class:dtl::Diff	access:private
+diff_ba	dtl/Diff3.hpp	/^        Diff< elem, sequence, comparator > diff_ba;$/;"	m	class:dtl::Diff3	access:private
+diff_bc	dtl/Diff3.hpp	/^        Diff< elem, sequence, comparator > diff_bc;$/;"	m	class:dtl::Diff3	access:private
+dtl	dtl/Diff.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/Diff3.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/Lcs.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/Sequence.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/Ses.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/functors.hpp	/^namespace dtl {$/;"	n
+dtl	dtl/variables.hpp	/^namespace dtl {$/;"	n
+dtl::ChangePrinter	dtl/functors.hpp	/^    class ChangePrinter : public Printer < sesElem, stream >$/;"	c	namespace:dtl	inherits:Printer
+dtl::ChangePrinter::ChangePrinter	dtl/functors.hpp	/^        ChangePrinter  ()            : Printer < sesElem, stream > ()    {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:()
+dtl::ChangePrinter::ChangePrinter	dtl/functors.hpp	/^        ChangePrinter  (stream& out) : Printer < sesElem, stream > (out) {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:(stream& out)
+dtl::ChangePrinter::operator ()	dtl/functors.hpp	/^        void operator() (const sesElem& se) const {$/;"	f	class:dtl::ChangePrinter	access:public	signature:(const sesElem& se) const
+dtl::ChangePrinter::~ChangePrinter	dtl/functors.hpp	/^        ~ChangePrinter () {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:()
+dtl::CommonPrinter	dtl/functors.hpp	/^    class CommonPrinter : public Printer < sesElem, stream >$/;"	c	namespace:dtl	inherits:Printer
+dtl::CommonPrinter::CommonPrinter	dtl/functors.hpp	/^        CommonPrinter  ()            : Printer < sesElem, stream > ()    {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:()
+dtl::CommonPrinter::CommonPrinter	dtl/functors.hpp	/^        CommonPrinter  (stream& out) : Printer < sesElem, stream > (out) {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:(stream& out)
+dtl::CommonPrinter::operator ()	dtl/functors.hpp	/^        void operator() (const sesElem& se) const {$/;"	f	class:dtl::CommonPrinter	access:public	signature:(const sesElem& se) const
+dtl::CommonPrinter::~CommonPrinter	dtl/functors.hpp	/^        ~CommonPrinter () {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:()
+dtl::Compare	dtl/functors.hpp	/^    class Compare$/;"	c	namespace:dtl
+dtl::Compare::Compare	dtl/functors.hpp	/^        Compare () {}$/;"	f	class:dtl::Compare	access:public	signature:()
+dtl::Compare::impl	dtl/functors.hpp	/^        virtual inline bool impl (const elem& e1, const elem& e2) const {$/;"	f	class:dtl::Compare	access:public	signature:(const elem& e1, const elem& e2) const
+dtl::Compare::~Compare	dtl/functors.hpp	/^        virtual ~Compare () {}$/;"	f	class:dtl::Compare	access:public	signature:()
+dtl::DTL_CONTEXT_SIZE	dtl/variables.hpp	/^    const long long DTL_CONTEXT_SIZE  = 3;$/;"	m	namespace:dtl
+dtl::DTL_SEPARATE_SIZE	dtl/variables.hpp	/^    const long long DTL_SEPARATE_SIZE = 3;$/;"	m	namespace:dtl
+dtl::Diff	dtl/Diff.hpp	/^    class Diff$/;"	c	namespace:dtl
+dtl::Diff3	dtl/Diff3.hpp	/^    class Diff3$/;"	c	namespace:dtl
+dtl::Diff3::A	dtl/Diff3.hpp	/^        sequence                           A;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::B	dtl/Diff3.hpp	/^        sequence                           B;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::C	dtl/Diff3.hpp	/^        sequence                           C;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::Diff3	dtl/Diff3.hpp	/^        Diff3 () {}$/;"	f	class:dtl::Diff3	access:public	signature:()
+dtl::Diff3::Diff3	dtl/Diff3.hpp	/^        Diff3 (const sequence& a, $/;"	f	class:dtl::Diff3	access:public	signature:(const sequence& a, const sequence& b, const sequence& c)
+dtl::Diff3::S	dtl/Diff3.hpp	/^        sequence                           S;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::addDecentSequence	dtl/Diff3.hpp	/^        void inline addDecentSequence (const sesElemVec_iter& end, sesElemVec_iter& it, elemVec& seq) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const sesElemVec_iter& end, sesElemVec_iter& it, elemVec& seq) const
+dtl::Diff3::compose	dtl/Diff3.hpp	/^        void compose () {$/;"	f	class:dtl::Diff3	access:public	signature:()
+dtl::Diff3::conflict	dtl/Diff3.hpp	/^        bool                               conflict;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::csepa	dtl/Diff3.hpp	/^        elem                               csepa;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::csepabegin	dtl/Diff3.hpp	/^        elem                               csepabegin;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::csepaend	dtl/Diff3.hpp	/^        elem                               csepaend;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::diff_ba	dtl/Diff3.hpp	/^        Diff< elem, sequence, comparator > diff_ba;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::diff_bc	dtl/Diff3.hpp	/^        Diff< elem, sequence, comparator > diff_bc;$/;"	m	class:dtl::Diff3	access:private
+dtl::Diff3::forwardUntilEnd	dtl/Diff3.hpp	/^        void inline forwardUntilEnd (const T_iter& end, T_iter& it) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const T_iter& end, T_iter& it) const
+dtl::Diff3::getMergedSequence	dtl/Diff3.hpp	/^        sequence getMergedSequence () const {$/;"	f	class:dtl::Diff3	access:public	signature:() const
+dtl::Diff3::isConflict	dtl/Diff3.hpp	/^        bool isConflict () const {$/;"	f	class:dtl::Diff3	access:public	signature:() const
+dtl::Diff3::isEnd	dtl/Diff3.hpp	/^        bool inline isEnd (const T_iter& end, const T_iter& it) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const T_iter& end, const T_iter& it) const
+dtl::Diff3::joinElemVec	dtl/Diff3.hpp	/^        void inline joinElemVec (elemVec& s1, elemVec& s2) const {$/;"	f	class:dtl::Diff3	access:private	signature:(elemVec& s1, elemVec& s2) const
+dtl::Diff3::merge	dtl/Diff3.hpp	/^        bool merge () {$/;"	f	class:dtl::Diff3	access:public	signature:()
+dtl::Diff3::merge_	dtl/Diff3.hpp	/^        sequence merge_ () {$/;"	f	class:dtl::Diff3	access:private	signature:()
+dtl::Diff3::~Diff3	dtl/Diff3.hpp	/^        ~Diff3 () {}$/;"	f	class:dtl::Diff3	access:public	signature:()
+dtl::Diff::A	dtl/Diff.hpp	/^        sequence           A;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::B	dtl/Diff.hpp	/^        sequence           B;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::Diff	dtl/Diff.hpp	/^        Diff () {}$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::Diff	dtl/Diff.hpp	/^        Diff (const sequence& a, $/;"	f	class:dtl::Diff	access:public	signature:(const sequence& a, const sequence& b)
+dtl::Diff::Diff	dtl/Diff.hpp	/^        Diff (const sequence& a, $/;"	f	class:dtl::Diff	access:public	signature:(const sequence& a, const sequence& b, const comparator& comp)
+dtl::Diff::M	dtl/Diff.hpp	/^        size_t             M;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::N	dtl/Diff.hpp	/^        size_t             N;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::cmp	dtl/Diff.hpp	/^        comparator         cmp;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::compose	dtl/Diff.hpp	/^        void compose() {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::composeSesFromStream	dtl/Diff.hpp	/^        static Ses< elem > composeSesFromStream (stream& st)$/;"	f	class:dtl::Diff	access:public	signature:(stream& st)
+dtl::Diff::composeUnifiedHunks	dtl/Diff.hpp	/^        void composeUnifiedHunks () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::delta	dtl/Diff.hpp	/^        size_t             delta;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::editDistance	dtl/Diff.hpp	/^        long long          editDistance;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::fp	dtl/Diff.hpp	/^        long long          *fp;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::getEditDistance	dtl/Diff.hpp	/^        long long getEditDistance () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::getLcs	dtl/Diff.hpp	/^        Lcs< elem > getLcs () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::getLcsVec	dtl/Diff.hpp	/^        elemVec getLcsVec () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::getSes	dtl/Diff.hpp	/^        Ses< elem > getSes () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::getUniHunks	dtl/Diff.hpp	/^        uniHunkVec getUniHunks () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::huge	dtl/Diff.hpp	/^        bool               huge;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::init	dtl/Diff.hpp	/^        void init () {$/;"	f	class:dtl::Diff	access:private	signature:()
+dtl::Diff::isHuge	dtl/Diff.hpp	/^        bool isHuge () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::isReverse	dtl/Diff.hpp	/^        bool inline isReverse () const {$/;"	f	class:dtl::Diff	access:private	signature:() const
+dtl::Diff::isUnserious	dtl/Diff.hpp	/^        bool isUnserious () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+dtl::Diff::joinSesVec	dtl/Diff.hpp	/^        void inline joinSesVec (sesElemVec& s1, sesElemVec& s2) const {$/;"	f	class:dtl::Diff	access:private	signature:(sesElemVec& s1, sesElemVec& s2) const
+dtl::Diff::lcs	dtl/Diff.hpp	/^        Lcs< elem >        lcs;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::offHuge	dtl/Diff.hpp	/^        void offHuge () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::offUnserious	dtl/Diff.hpp	/^        void offUnserious () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::offset	dtl/Diff.hpp	/^        size_t             offset;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::onHuge	dtl/Diff.hpp	/^        void onHuge () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::onOnlyEditDistance	dtl/Diff.hpp	/^        void onOnlyEditDistance () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::onUnserious	dtl/Diff.hpp	/^        void onUnserious () {$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Diff::onlyEditDistance	dtl/Diff.hpp	/^        bool               onlyEditDistance;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::patch	dtl/Diff.hpp	/^        sequence patch (const sequence& seq) const {$/;"	f	class:dtl::Diff	access:public	signature:(const sequence& seq) const
+dtl::Diff::path	dtl/Diff.hpp	/^        editPath           path;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::pathCordinates	dtl/Diff.hpp	/^        editPathCordinates pathCordinates;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::printSES	dtl/Diff.hpp	/^        static void printSES (const Ses< elem >& s, ostream& out = cout) {$/;"	f	class:dtl::Diff	access:public	signature:(const Ses< elem >& s, ostream& out = cout)
+dtl::Diff::printSES	dtl/Diff.hpp	/^        static void printSES (const Ses< elem >& s, stream& out) {$/;"	f	class:dtl::Diff	access:public	signature:(const Ses< elem >& s, stream& out)
+dtl::Diff::printSES	dtl/Diff.hpp	/^        void printSES (ostream& out = cout) const {$/;"	f	class:dtl::Diff	access:public	signature:(ostream& out = cout) const
+dtl::Diff::printSES	dtl/Diff.hpp	/^        void printSES (stream& out) const {$/;"	f	class:dtl::Diff	access:public	signature:(stream& out) const
+dtl::Diff::printUnifiedFormat	dtl/Diff.hpp	/^        static void printUnifiedFormat (const uniHunkVec& hunks, ostream& out = cout) {$/;"	f	class:dtl::Diff	access:public	signature:(const uniHunkVec& hunks, ostream& out = cout)
+dtl::Diff::printUnifiedFormat	dtl/Diff.hpp	/^        static void printUnifiedFormat (const uniHunkVec& hunks, stream& out) {$/;"	f	class:dtl::Diff	access:public	signature:(const uniHunkVec& hunks, stream& out)
+dtl::Diff::printUnifiedFormat	dtl/Diff.hpp	/^        void printUnifiedFormat (ostream& out = cout) const {$/;"	f	class:dtl::Diff	access:public	signature:(ostream& out = cout) const
+dtl::Diff::printUnifiedFormat	dtl/Diff.hpp	/^        void printUnifiedFormat (stream& out) const {$/;"	f	class:dtl::Diff	access:public	signature:(stream& out) const
+dtl::Diff::recordOddSequence	dtl/Diff.hpp	/^        void inline recordOddSequence (long long idx, long long length, sequence_const_iter it, const edit_t et) {$/;"	f	class:dtl::Diff	access:private	signature:(long long idx, long long length, sequence_const_iter it, const edit_t et)
+dtl::Diff::recordSequence	dtl/Diff.hpp	/^        bool recordSequence (const editPathCordinates& v) {$/;"	f	class:dtl::Diff	access:private	signature:(const editPathCordinates& v)
+dtl::Diff::reverse	dtl/Diff.hpp	/^        bool               reverse;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::ses	dtl/Diff.hpp	/^        Ses< elem >        ses;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::snake	dtl/Diff.hpp	/^        long long snake(const long long& k, const long long& above, const long long& below) {$/;"	f	class:dtl::Diff	access:private	signature:(const long long& k, const long long& above, const long long& below)
+dtl::Diff::uniHunks	dtl/Diff.hpp	/^        uniHunkVec         uniHunks;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::uniPatch	dtl/Diff.hpp	/^        sequence uniPatch (const sequence& seq) {$/;"	f	class:dtl::Diff	access:public	signature:(const sequence& seq)
+dtl::Diff::unserious	dtl/Diff.hpp	/^        bool               unserious;$/;"	m	class:dtl::Diff	access:private
+dtl::Diff::~Diff	dtl/Diff.hpp	/^        ~Diff() {}$/;"	f	class:dtl::Diff	access:public	signature:()
+dtl::Lcs	dtl/Lcs.hpp	/^    class Lcs : public Sequence< elem >$/;"	c	namespace:dtl	inherits:Sequence
+dtl::Lcs::Lcs	dtl/Lcs.hpp	/^        Lcs ()  {}$/;"	f	class:dtl::Lcs	access:public	signature:()
+dtl::Lcs::~Lcs	dtl/Lcs.hpp	/^        ~Lcs () {}$/;"	f	class:dtl::Lcs	access:public	signature:()
+dtl::MAX_CORDINATES_SIZE	dtl/variables.hpp	/^    const unsigned long long MAX_CORDINATES_SIZE = 2000000;$/;"	m	namespace:dtl
+dtl::P	dtl/variables.hpp	/^    } P;$/;"	t	namespace:dtl	typeref:struct:dtl::Point
+dtl::Point	dtl/variables.hpp	/^    typedef struct Point {$/;"	s	namespace:dtl
+dtl::Point::k	dtl/variables.hpp	/^        long long k;                         \/\/ vertex$/;"	m	struct:dtl::Point	access:public
+dtl::Point::x	dtl/variables.hpp	/^        long long x;                         \/\/ x cordinate$/;"	m	struct:dtl::Point	access:public
+dtl::Point::y	dtl/variables.hpp	/^        long long y;                         \/\/ y cordinate$/;"	m	struct:dtl::Point	access:public
+dtl::Printer	dtl/functors.hpp	/^    class Printer$/;"	c	namespace:dtl
+dtl::Printer::Printer	dtl/functors.hpp	/^        Printer ()            : out_(cout) {}$/;"	f	class:dtl::Printer	access:public	signature:()
+dtl::Printer::Printer	dtl/functors.hpp	/^        Printer (stream& out) : out_(out)  {}$/;"	f	class:dtl::Printer	access:public	signature:(stream& out)
+dtl::Printer::operator ()	dtl/functors.hpp	/^        virtual void operator() (const sesElem& se) const = 0;$/;"	p	class:dtl::Printer	access:public	signature:(const sesElem& se) const
+dtl::Printer::out_	dtl/functors.hpp	/^        stream& out_;$/;"	m	class:dtl::Printer	access:protected
+dtl::Printer::~Printer	dtl/functors.hpp	/^        virtual ~Printer () {}$/;"	f	class:dtl::Printer	access:public	signature:()
+dtl::SES_ADD	dtl/variables.hpp	/^    const   edit_t SES_ADD    = 1;$/;"	m	namespace:dtl
+dtl::SES_COMMON	dtl/variables.hpp	/^    const   edit_t SES_COMMON = 0;$/;"	m	namespace:dtl
+dtl::SES_DELETE	dtl/variables.hpp	/^    const   edit_t SES_DELETE = -1;$/;"	m	namespace:dtl
+dtl::Sequence	dtl/Sequence.hpp	/^    class Sequence$/;"	c	namespace:dtl
+dtl::Sequence::Sequence	dtl/Sequence.hpp	/^        Sequence () {}$/;"	f	class:dtl::Sequence	access:public	signature:()
+dtl::Sequence::addSequence	dtl/Sequence.hpp	/^        void addSequence (elem e) {$/;"	f	class:dtl::Sequence	access:public	signature:(elem e)
+dtl::Sequence::elemVec	dtl/Sequence.hpp	/^        typedef vector< elem > elemVec;$/;"	t	class:dtl::Sequence	access:public
+dtl::Sequence::getSequence	dtl/Sequence.hpp	/^        elemVec getSequence () const {$/;"	f	class:dtl::Sequence	access:public	signature:() const
+dtl::Sequence::sequence	dtl/Sequence.hpp	/^        elemVec sequence;$/;"	m	class:dtl::Sequence	access:protected
+dtl::Sequence::~Sequence	dtl/Sequence.hpp	/^        virtual ~Sequence () {}$/;"	f	class:dtl::Sequence	access:public	signature:()
+dtl::Ses	dtl/Ses.hpp	/^    class Ses : public Sequence< elem >$/;"	c	namespace:dtl	inherits:Sequence
+dtl::Ses::Ses	dtl/Ses.hpp	/^        Ses () : onlyAdd(true), onlyDelete(true), onlyCopy(true) { }$/;"	f	class:dtl::Ses	access:public	signature:()
+dtl::Ses::addSequence	dtl/Ses.hpp	/^        void addSequence (elem e, long long beforeIdx, long long afterIdx, const edit_t type) {$/;"	f	class:dtl::Ses	access:public	signature:(elem e, long long beforeIdx, long long afterIdx, const edit_t type)
+dtl::Ses::getSequence	dtl/Ses.hpp	/^        sesElemVec getSequence () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::isChange	dtl/Ses.hpp	/^        bool isChange () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::isOnlyAdd	dtl/Ses.hpp	/^        bool isOnlyAdd () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::isOnlyCopy	dtl/Ses.hpp	/^        bool isOnlyCopy () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::isOnlyDelete	dtl/Ses.hpp	/^        bool isOnlyDelete () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::isOnlyOneOperation	dtl/Ses.hpp	/^        bool isOnlyOneOperation () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+dtl::Ses::onlyAdd	dtl/Ses.hpp	/^        bool       onlyAdd;$/;"	m	class:dtl::Ses	access:private
+dtl::Ses::onlyCopy	dtl/Ses.hpp	/^        bool       onlyCopy;$/;"	m	class:dtl::Ses	access:private
+dtl::Ses::onlyDelete	dtl/Ses.hpp	/^        bool       onlyDelete;$/;"	m	class:dtl::Ses	access:private
+dtl::Ses::sequence	dtl/Ses.hpp	/^        sesElemVec sequence;$/;"	m	class:dtl::Ses	access:private
+dtl::Ses::sesElem	dtl/Ses.hpp	/^        typedef pair< elem, elemInfo > sesElem;$/;"	t	class:dtl::Ses	access:private
+dtl::Ses::sesElemVec	dtl/Ses.hpp	/^        typedef vector< sesElem >      sesElemVec;$/;"	t	class:dtl::Ses	access:private
+dtl::Ses::~Ses	dtl/Ses.hpp	/^        ~Ses () {}$/;"	f	class:dtl::Ses	access:public	signature:()
+dtl::UniHunkPrinter	dtl/functors.hpp	/^    class UniHunkPrinter$/;"	c	namespace:dtl
+dtl::UniHunkPrinter::UniHunkPrinter	dtl/functors.hpp	/^        UniHunkPrinter  ()            : out_(cout) {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:()
+dtl::UniHunkPrinter::UniHunkPrinter	dtl/functors.hpp	/^        UniHunkPrinter  (stream& out) : out_(out)  {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:(stream& out)
+dtl::UniHunkPrinter::operator ()	dtl/functors.hpp	/^        void operator() (const uniHunk< sesElem >& hunk) const {$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:(const uniHunk< sesElem >& hunk) const
+dtl::UniHunkPrinter::out_	dtl/functors.hpp	/^        stream& out_;$/;"	m	class:dtl::UniHunkPrinter	access:private
+dtl::UniHunkPrinter::~UniHunkPrinter	dtl/functors.hpp	/^        ~UniHunkPrinter () {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:()
+dtl::editPath	dtl/variables.hpp	/^    typedef vector< long long > editPath;$/;"	t	namespace:dtl
+dtl::editPathCordinates	dtl/variables.hpp	/^    typedef vector< P >         editPathCordinates;$/;"	t	namespace:dtl
+dtl::edit_t	dtl/variables.hpp	/^    typedef int edit_t;$/;"	t	namespace:dtl
+dtl::elemInfo	dtl/variables.hpp	/^    } elemInfo;$/;"	t	namespace:dtl	typeref:struct:dtl::eleminfo
+dtl::eleminfo	dtl/variables.hpp	/^    typedef struct eleminfo {$/;"	s	namespace:dtl
+dtl::eleminfo::afterIdx	dtl/variables.hpp	/^        long long afterIdx;            \/\/ index of after sequence$/;"	m	struct:dtl::eleminfo	access:public
+dtl::eleminfo::beforeIdx	dtl/variables.hpp	/^        long long beforeIdx;           \/\/ index of prev sequence$/;"	m	struct:dtl::eleminfo	access:public
+dtl::eleminfo::type	dtl/variables.hpp	/^        edit_t    type;                \/\/ type of edit(Add, Delete, Common)$/;"	m	struct:dtl::eleminfo	access:public
+dtl::uniHunk	dtl/variables.hpp	/^    struct uniHunk {$/;"	s	namespace:dtl
+dtl::uniHunk::a	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::b	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::c	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::change	dtl/variables.hpp	/^        vector< sesElem > change;    \/\/ changes$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::common	dtl/variables.hpp	/^        vector< sesElem > common[2]; \/\/ anteroposterior commons on changes$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::d	dtl/variables.hpp	/^        long long a, b, c, d;        \/\/ @@ -a,b +c,d @@$/;"	m	struct:dtl::uniHunk	access:public
+dtl::uniHunk::inc_dec_count	dtl/variables.hpp	/^        long long inc_dec_count;     \/\/ count of increace and decrease$/;"	m	struct:dtl::uniHunk	access:public
+dtl_typedefs	dtl/variables.hpp	118;"	d
+editDistance	dtl/Diff.hpp	/^        long long          editDistance;$/;"	m	class:dtl::Diff	access:private
+editPath	dtl/variables.hpp	/^    typedef vector< long long > editPath;$/;"	t	namespace:dtl
+editPathCordinates	dtl/variables.hpp	/^    typedef vector< P >         editPathCordinates;$/;"	t	namespace:dtl
+edit_t	dtl/variables.hpp	/^    typedef int edit_t;$/;"	t	namespace:dtl
+elemInfo	dtl/variables.hpp	/^    } elemInfo;$/;"	t	namespace:dtl	typeref:struct:dtl::eleminfo
+elemVec	dtl/Sequence.hpp	/^        typedef vector< elem > elemVec;$/;"	t	class:dtl::Sequence	access:public
+eleminfo	dtl/variables.hpp	/^    typedef struct eleminfo {$/;"	s	namespace:dtl
+forwardUntilEnd	dtl/Diff3.hpp	/^        void inline forwardUntilEnd (const T_iter& end, T_iter& it) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const T_iter& end, T_iter& it) const
+fp	dtl/Diff.hpp	/^        long long          *fp;$/;"	m	class:dtl::Diff	access:private
+getEditDistance	dtl/Diff.hpp	/^        long long getEditDistance () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+getLcs	dtl/Diff.hpp	/^        Lcs< elem > getLcs () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+getLcsVec	dtl/Diff.hpp	/^        elemVec getLcsVec () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+getMergedSequence	dtl/Diff3.hpp	/^        sequence getMergedSequence () const {$/;"	f	class:dtl::Diff3	access:public	signature:() const
+getSequence	dtl/Sequence.hpp	/^        elemVec getSequence () const {$/;"	f	class:dtl::Sequence	access:public	signature:() const
+getSequence	dtl/Ses.hpp	/^        sesElemVec getSequence () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+getSes	dtl/Diff.hpp	/^        Ses< elem > getSes () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+getUniHunks	dtl/Diff.hpp	/^        uniHunkVec getUniHunks () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+huge	dtl/Diff.hpp	/^        bool               huge;$/;"	m	class:dtl::Diff	access:private
+impl	dtl/functors.hpp	/^        virtual inline bool impl (const elem& e1, const elem& e2) const {$/;"	f	class:dtl::Compare	access:public	signature:(const elem& e1, const elem& e2) const
+inc_dec_count	dtl/variables.hpp	/^        long long inc_dec_count;     \/\/ count of increace and decrease$/;"	m	struct:dtl::uniHunk	access:public
+init	dtl/Diff.hpp	/^        void init () {$/;"	f	class:dtl::Diff	access:private	signature:()
+isChange	dtl/Ses.hpp	/^        bool isChange () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+isConflict	dtl/Diff3.hpp	/^        bool isConflict () const {$/;"	f	class:dtl::Diff3	access:public	signature:() const
+isEnd	dtl/Diff3.hpp	/^        bool inline isEnd (const T_iter& end, const T_iter& it) const {$/;"	f	class:dtl::Diff3	access:private	signature:(const T_iter& end, const T_iter& it) const
+isHuge	dtl/Diff.hpp	/^        bool isHuge () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+isOnlyAdd	dtl/Ses.hpp	/^        bool isOnlyAdd () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+isOnlyCopy	dtl/Ses.hpp	/^        bool isOnlyCopy () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+isOnlyDelete	dtl/Ses.hpp	/^        bool isOnlyDelete () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+isOnlyOneOperation	dtl/Ses.hpp	/^        bool isOnlyOneOperation () const {$/;"	f	class:dtl::Ses	access:public	signature:() const
+isReverse	dtl/Diff.hpp	/^        bool inline isReverse () const {$/;"	f	class:dtl::Diff	access:private	signature:() const
+isUnserious	dtl/Diff.hpp	/^        bool isUnserious () const {$/;"	f	class:dtl::Diff	access:public	signature:() const
+joinElemVec	dtl/Diff3.hpp	/^        void inline joinElemVec (elemVec& s1, elemVec& s2) const {$/;"	f	class:dtl::Diff3	access:private	signature:(elemVec& s1, elemVec& s2) const
+joinSesVec	dtl/Diff.hpp	/^        void inline joinSesVec (sesElemVec& s1, sesElemVec& s2) const {$/;"	f	class:dtl::Diff	access:private	signature:(sesElemVec& s1, sesElemVec& s2) const
+k	dtl/variables.hpp	/^        long long k;                         \/\/ vertex$/;"	m	struct:dtl::Point	access:public
+lcs	dtl/Diff.hpp	/^        Lcs< elem >        lcs;$/;"	m	class:dtl::Diff	access:private
+merge	dtl/Diff3.hpp	/^        bool merge () {$/;"	f	class:dtl::Diff3	access:public	signature:()
+merge_	dtl/Diff3.hpp	/^        sequence merge_ () {$/;"	f	class:dtl::Diff3	access:private	signature:()
+offHuge	dtl/Diff.hpp	/^        void offHuge () {$/;"	f	class:dtl::Diff	access:public	signature:()
+offUnserious	dtl/Diff.hpp	/^        void offUnserious () {$/;"	f	class:dtl::Diff	access:public	signature:()
+offset	dtl/Diff.hpp	/^        size_t             offset;$/;"	m	class:dtl::Diff	access:private
+onHuge	dtl/Diff.hpp	/^        void onHuge () {$/;"	f	class:dtl::Diff	access:public	signature:()
+onOnlyEditDistance	dtl/Diff.hpp	/^        void onOnlyEditDistance () {$/;"	f	class:dtl::Diff	access:public	signature:()
+onUnserious	dtl/Diff.hpp	/^        void onUnserious () {$/;"	f	class:dtl::Diff	access:public	signature:()
+onlyAdd	dtl/Ses.hpp	/^        bool       onlyAdd;$/;"	m	class:dtl::Ses	access:private
+onlyCopy	dtl/Ses.hpp	/^        bool       onlyCopy;$/;"	m	class:dtl::Ses	access:private
+onlyDelete	dtl/Ses.hpp	/^        bool       onlyDelete;$/;"	m	class:dtl::Ses	access:private
+onlyEditDistance	dtl/Diff.hpp	/^        bool               onlyEditDistance;$/;"	m	class:dtl::Diff	access:private
+operator ()	dtl/functors.hpp	/^        virtual void operator() (const sesElem& se) const = 0;$/;"	p	class:dtl::Printer	access:public	signature:(const sesElem& se) const
+operator ()	dtl/functors.hpp	/^        void operator() (const sesElem& se) const {$/;"	f	class:dtl::ChangePrinter	access:public	signature:(const sesElem& se) const
+operator ()	dtl/functors.hpp	/^        void operator() (const sesElem& se) const {$/;"	f	class:dtl::CommonPrinter	access:public	signature:(const sesElem& se) const
+operator ()	dtl/functors.hpp	/^        void operator() (const uniHunk< sesElem >& hunk) const {$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:(const uniHunk< sesElem >& hunk) const
+out_	dtl/functors.hpp	/^        stream& out_;$/;"	m	class:dtl::Printer	access:protected
+out_	dtl/functors.hpp	/^        stream& out_;$/;"	m	class:dtl::UniHunkPrinter	access:private
+patch	dtl/Diff.hpp	/^        sequence patch (const sequence& seq) const {$/;"	f	class:dtl::Diff	access:public	signature:(const sequence& seq) const
+path	dtl/Diff.hpp	/^        editPath           path;$/;"	m	class:dtl::Diff	access:private
+pathCordinates	dtl/Diff.hpp	/^        editPathCordinates pathCordinates;$/;"	m	class:dtl::Diff	access:private
+printSES	dtl/Diff.hpp	/^        static void printSES (const Ses< elem >& s, ostream& out = cout) {$/;"	f	class:dtl::Diff	access:public	signature:(const Ses< elem >& s, ostream& out = cout)
+printSES	dtl/Diff.hpp	/^        static void printSES (const Ses< elem >& s, stream& out) {$/;"	f	class:dtl::Diff	access:public	signature:(const Ses< elem >& s, stream& out)
+printSES	dtl/Diff.hpp	/^        void printSES (ostream& out = cout) const {$/;"	f	class:dtl::Diff	access:public	signature:(ostream& out = cout) const
+printSES	dtl/Diff.hpp	/^        void printSES (stream& out) const {$/;"	f	class:dtl::Diff	access:public	signature:(stream& out) const
+printUnifiedFormat	dtl/Diff.hpp	/^        static void printUnifiedFormat (const uniHunkVec& hunks, ostream& out = cout) {$/;"	f	class:dtl::Diff	access:public	signature:(const uniHunkVec& hunks, ostream& out = cout)
+printUnifiedFormat	dtl/Diff.hpp	/^        static void printUnifiedFormat (const uniHunkVec& hunks, stream& out) {$/;"	f	class:dtl::Diff	access:public	signature:(const uniHunkVec& hunks, stream& out)
+printUnifiedFormat	dtl/Diff.hpp	/^        void printUnifiedFormat (ostream& out = cout) const {$/;"	f	class:dtl::Diff	access:public	signature:(ostream& out = cout) const
+printUnifiedFormat	dtl/Diff.hpp	/^        void printUnifiedFormat (stream& out) const {$/;"	f	class:dtl::Diff	access:public	signature:(stream& out) const
+recordOddSequence	dtl/Diff.hpp	/^        void inline recordOddSequence (long long idx, long long length, sequence_const_iter it, const edit_t et) {$/;"	f	class:dtl::Diff	access:private	signature:(long long idx, long long length, sequence_const_iter it, const edit_t et)
+recordSequence	dtl/Diff.hpp	/^        bool recordSequence (const editPathCordinates& v) {$/;"	f	class:dtl::Diff	access:private	signature:(const editPathCordinates& v)
+reverse	dtl/Diff.hpp	/^        bool               reverse;$/;"	m	class:dtl::Diff	access:private
+sequence	dtl/Sequence.hpp	/^        elemVec sequence;$/;"	m	class:dtl::Sequence	access:protected
+sequence	dtl/Ses.hpp	/^        sesElemVec sequence;$/;"	m	class:dtl::Ses	access:private
+ses	dtl/Diff.hpp	/^        Ses< elem >        ses;$/;"	m	class:dtl::Diff	access:private
+sesElem	dtl/Ses.hpp	/^        typedef pair< elem, elemInfo > sesElem;$/;"	t	class:dtl::Ses	access:private
+sesElemVec	dtl/Ses.hpp	/^        typedef vector< sesElem >      sesElemVec;$/;"	t	class:dtl::Ses	access:private
+sip_messages	registrar_sip_messages.h	/^const char* sip_messages[] = {$/;"	v
+sip_messages	sip_messages.h	/^const char* sip_messages[] = {$/;"	v
+snake	dtl/Diff.hpp	/^        long long snake(const long long& k, const long long& above, const long long& below) {$/;"	f	class:dtl::Diff	access:private	signature:(const long long& k, const long long& above, const long long& below)
+type	dtl/variables.hpp	/^        edit_t    type;                \/\/ type of edit(Add, Delete, Common)$/;"	m	struct:dtl::eleminfo	access:public
+uniHunk	dtl/variables.hpp	/^    struct uniHunk {$/;"	s	namespace:dtl
+uniHunks	dtl/Diff.hpp	/^        uniHunkVec         uniHunks;$/;"	m	class:dtl::Diff	access:private
+uniPatch	dtl/Diff.hpp	/^        sequence uniPatch (const sequence& seq) {$/;"	f	class:dtl::Diff	access:public	signature:(const sequence& seq)
+unserious	dtl/Diff.hpp	/^        bool               unserious;$/;"	m	class:dtl::Diff	access:private
+x	dtl/variables.hpp	/^        long long x;                         \/\/ x cordinate$/;"	m	struct:dtl::Point	access:public
+y	dtl/variables.hpp	/^        long long y;                         \/\/ y cordinate$/;"	m	struct:dtl::Point	access:public
+~ChangePrinter	dtl/functors.hpp	/^        ~ChangePrinter () {}$/;"	f	class:dtl::ChangePrinter	access:public	signature:()
+~CommonPrinter	dtl/functors.hpp	/^        ~CommonPrinter () {}$/;"	f	class:dtl::CommonPrinter	access:public	signature:()
+~Compare	dtl/functors.hpp	/^        virtual ~Compare () {}$/;"	f	class:dtl::Compare	access:public	signature:()
+~Diff	dtl/Diff.hpp	/^        ~Diff() {}$/;"	f	class:dtl::Diff	access:public	signature:()
+~Diff3	dtl/Diff3.hpp	/^        ~Diff3 () {}$/;"	f	class:dtl::Diff3	access:public	signature:()
+~Lcs	dtl/Lcs.hpp	/^        ~Lcs () {}$/;"	f	class:dtl::Lcs	access:public	signature:()
+~Printer	dtl/functors.hpp	/^        virtual ~Printer () {}$/;"	f	class:dtl::Printer	access:public	signature:()
+~Sequence	dtl/Sequence.hpp	/^        virtual ~Sequence () {}$/;"	f	class:dtl::Sequence	access:public	signature:()
+~Ses	dtl/Ses.hpp	/^        ~Ses () {}$/;"	f	class:dtl::Ses	access:public	signature:()
+~UniHunkPrinter	dtl/functors.hpp	/^        ~UniHunkPrinter () {}$/;"	f	class:dtl::UniHunkPrinter	access:public	signature:()

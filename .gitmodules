@@ -1,0 +1,6 @@
+[submodule "zeromq2-1"]
+	path = zmq
+	url = git://github.com/zeromq/zeromq2-1.git
+[submodule "redis-cplusplus-client"]
+	path = redis-cplusplus-client
+	url = git://github.com/mrpi/redis-cplusplus-client.git

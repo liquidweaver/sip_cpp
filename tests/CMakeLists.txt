@@ -17,6 +17,6 @@ add_executable (
 # link libraries
 target_link_libraries (
 	sipserver_tests
-	sipserver
+	sip
 	${Boost_LIBRARIES}	
 )

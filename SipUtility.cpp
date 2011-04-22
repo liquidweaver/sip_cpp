@@ -2,8 +2,8 @@
 #include <boost/regex.hpp>
 #include "SipRequest.hpp"
 #include "SipResponse.hpp"
-namespace Sip { namespace Utility {
-void FillTags( const string& rawTags, map<string, string>& tagMap)
+namespace Sip {
+void Utility::FillTags( const string& rawTags, map<string, string>& tagMap)
 {
 			boost::regex tagSearch( ";([^;=]+)(?:=([^;]+))?" );
 			boost::match_results<std::string::const_iterator> tags;
@@ -20,7 +20,8 @@ void FillTags( const string& rawTags, map<string, string>& tagMap)
 				start = tags[0].second;
 			}
 }
-void ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data ) {
+
+void Utility::ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data ) {
 	boost::regex requestRegex( "^\\s*(\\w+)\\ssip:(.+?)\\sSIP/2.0$\\r\\n.*" );
 	boost::regex responseRegex( "^\\s*SIP/2.0\\s(\\d{3})\\s(.*?)\\r\\n.*" );
 	boost::cmatch matches;
@@ -45,4 +46,4 @@ void ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data ) {
 		throw SipMessageException( string( "Invalid SIP message:\n" ) + e.what() );
 	}
 }
-}; };//namespace Sip::Utility
+};//namespace Sip

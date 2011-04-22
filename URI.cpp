@@ -240,7 +240,6 @@ ostream& operator<< ( ostream &stream, const URI& uri )
 
 void URI::ParseURI( const string& uriAsString ) throw( URIException )
 {
-	using Utility::FillTags;
 	//TODO: nakedURI MUST NOT MATCH SOMETHING WITH BRACKETS
 	//TODO: match either host[:port] or user@host[:port] rather than current scheme for part before URI parameters
 
@@ -296,7 +295,7 @@ void URI::ParseURI( const string& uriAsString ) throw( URIException )
 					rawTags = string( matches[sub].first, matches[sub].second );
 					if ( rawTags != "" )
 					{
-						FillTags( rawTags, m_URIParameters);
+						Utility::FillTags( rawTags, m_URIParameters);
 					}
 					break;
 				case 7:	//Optional URI headers
@@ -343,7 +342,7 @@ void URI::ParseURI( const string& uriAsString ) throw( URIException )
 					rawTags = string( matches[sub].first, matches[sub].second );
 					if ( rawTags != "" )
 					{
-						FillTags( rawTags, m_URIParameters);
+						Utility::FillTags( rawTags, m_URIParameters);
 					}
 					break;
 				case 6:	//Optional URI headers

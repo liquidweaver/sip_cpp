@@ -271,7 +271,6 @@ void SipMessage::ProcessSipMessage( string::const_iterator start, string::const_
 
 void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawString ) throw( SipMessageException )
 {
-	using Utility::FillTags;
 	boost::regex ws( "\\r\\n" );
 	//Remove all CRLF's
 	rawString = boost::regex_replace( rawString, ws, "" );
@@ -336,7 +335,7 @@ void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawSt
 		if ( rawTags != "" )
 		{
 			map<string, string> tagMap;
-			FillTags( rawTags, tagMap );
+			Utility::FillTags( rawTags, tagMap );
 			PushHeader( headerName, SipHeaderValue( value, tagMap ) );
 		}
 		else
@@ -344,7 +343,7 @@ void SipMessage::ProcessSipHeaderValues( const string& headerName, string& rawSt
 	}
 }
 
-static void CSVSeperate( const string& rawString, queue<string>& elements )
+void SipMessage::CSVSeperate( const string& rawString, queue<string>& elements )
 {
 	bool inQuotes = false;
 	string currentString;

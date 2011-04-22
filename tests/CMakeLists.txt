@@ -12,6 +12,7 @@ add_executable (
 	TestRunner.cpp
 	#test suites
 	parse_tests.cpp
+	registrar.cpp
 )
 
 # link libraries

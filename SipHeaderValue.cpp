@@ -16,8 +16,6 @@ SipHeaderValue::SipHeaderValue( const string& value,  map<string, string> tags) 
 SipHeaderValue::SipHeaderValue( const string& rawValue ) throw()
 	: m_hasTags( false ), m_value( rawValue )
 {
-	using Utility::FillTags;
-
 	boost::regex semiURICheck( "^((?:\".*?\")|(?:[^<\"]+))?\\s*<" );
 	//Used to match with one or more tags
 	boost::regex tagsAreaMatch( "((?:;[^;\\?]+)*)(?:\\?.*)?$" );
@@ -72,7 +70,7 @@ SipHeaderValue::SipHeaderValue( const string& rawValue ) throw()
 
 	if ( rawTags != "" )
 	{
-		FillTags( rawTags, m_tags );
+		Utility::FillTags( rawTags, m_tags );
 		m_hasTags = true;
 	}
 }

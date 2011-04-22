@@ -104,32 +104,6 @@ const char* sip_messages[] = {
 "a=fmtp:18 annexb=no\r\n"
 "a=rtpmap:101 telephone-event/8000\r\n",
 
-"INVITE sip:3181@10.1.1.11 SIP/2.0\r\n"
-"v: SIP/2.0/UDP 172.20.3.20:5060\r\n"
-"t: <sip:3181@10.1.1.11;user=phone>\r\n"
-"f: \"Josh Test\"<sip:3170@10.1.1.11;user=phone>;tag=3b1dd748-01d6-0342-13cf-00e0bb36ca69\r\n"
-"i: 3b1dd748-01d6-0342-13d0-00e0bb36ca69\r\n"
-"CSeq: 5001 INVITE\r\n"
-"Max-Forwards: 70\r\n"
-"m: <sip:3170@172.20.3.20:5060>\r\n"
-"User-Agent: 3Com-SIP-Phone/V7.1.53.53\r\n"
-"c: application/sdp\r\n"
-"P-Asserted-Identity: \"Josh Test\" <sip:3170@172.20.3.20>\r\n"
-"l: 238\r\n"
-"\r\n"
-"v=0\r\n"
-"o=- 3687453239 0 IN IP4 172.20.3.20\r\n"
-"s=3181\r\n"
-"c=IN IP4 172.20.3.20\r\n"
-"t=0 0\r\n"
-"m=audio 8010 RTP/AVP 18 0 96\r\n"
-"a=rtpmap:18 G729/8000\r\n"
-"a=fmtp:18 annexb=yes\r\n"
-"a=rtpmap:0 PCMU/8000\r\n"
-"a=fmtp:96 0-15\r\n"
-"a=rtpmap:96 telephone-event/8000\r\n"
-"a=ptime:20\r\n",
-
 "SUBSCRIBE sip:3927@172.20.10.11 SIP/2.0\r\n"
 "Via: SIP/2.0/UDP 172.20.10.15:5060;branch=01c25868f92833aa65cbf91ca61359de\r\n"
 "From: <sip:003018CFE4EF@172.20.10.11>;tag=a029cd8a32ac851c82209daf16ec1025\r\n"
@@ -142,7 +116,7 @@ const char* sip_messages[] = {
 "Expires: 3600\r\n"
 "Accept: application/mac-address\r\n"
 "User-Agent: \"VCX SIM UA\"; mac=003018CFE4EF\r\n"
-"Content-Length: 0\r\n",
+"Content-Length: 0\r\n\r\n",
 
 NULL
 };

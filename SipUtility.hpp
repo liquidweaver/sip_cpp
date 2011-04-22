@@ -7,7 +7,9 @@
 using std::string;
 using std::map;
 using std::auto_ptr;
-namespace Sip { namespace Utility {
+namespace Sip { 
+class Utility {
+	public:
 	/**
 	 *     Utility function for transforming a string of key & value tags into a map of tags
 	 * @param rawTags A string representations of one or more tags in the format (;key=value)*
@@ -23,5 +25,6 @@ namespace Sip { namespace Utility {
 	 */
 	static void ParseMessage( auto_ptr<SipMessage>& sipMessage, const string& data );
 
-}; }; //namespace Sip::Utility
+}; //class Utility
+}; //namespace Sip
 #endif //SIPUTILITY_H

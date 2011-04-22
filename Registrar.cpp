@@ -3,8 +3,13 @@
 #include "redis-cplusplus-client/redisclient.h"
 
 namespace Sip {
+//
+//GLOBAL DEFS
+//
+const char* SIP_MIN_EXPIRE = "300";
 
 auto_ptr<SipResponse> Registrar::HandleRequest( const SipRequest& request ) {
+
 	auto_ptr<SipResponse> response( new SipResponse( 200, "OK", request ) );
 	try {
 		redis::client rc;
@@ -43,7 +48,7 @@ auto_ptr<SipResponse> Registrar::HandleRequest( const SipRequest& request ) {
 			rc.expire( path.str(), toExpire );
 		}
 	} catch( exception& err ) {
-		response->SetStatusCode( "500" );
+		response->SetStatusCode( 500 );
 		response->SetReasonPhrase( err.what() );
 
 		return response;

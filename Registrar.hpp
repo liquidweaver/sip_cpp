@@ -3,7 +3,6 @@
 #include "UAS.hpp"
 
 namespace Sip {
-const char* SIP_MIN_EXPIRE = "300";
 
 /** 
 * @brief Handles REGISTER requests, adds appropriate entries to redis db
